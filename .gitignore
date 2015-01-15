@@ -8,3 +8,5 @@
 **/static/js/partials/compiled/
 **/js/compiled/*.js
 **/css/compiled/*.css
+**/bower_components/*
+npm-debug.log
