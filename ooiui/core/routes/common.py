@@ -25,9 +25,6 @@ def chart_demo():
 def plots_demo():
     return render_template('common/plotsDemo.html')
 
-@app.route('/opLog.html')
-def op_log():
-    return render_template('common/opLog.html')
 
 
 @app.route('/api/user', methods=['POST'])
