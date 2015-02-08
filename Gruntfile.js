@@ -95,7 +95,7 @@ module.exports = function(grunt) {
             "ooiui/static/js/partials/Panel.html",
             "ooiui/static/js/partials/Alert.html",
             'ooiui/static/js/partials/Chart.html',
-            'ooiui/static/js/partials/ChartTypeTemplate.html',  
+            'ooiui/static/js/partials/ChartTypeTemplate.html',
             'ooiui/static/js/partials/ChartFilterTemplate.html'
           ],
           "ooiui/static/js/partials/compiled/OpLog.js": [
@@ -295,7 +295,7 @@ module.exports = function(grunt) {
             //Collection
             'ooiui/static/js/collections/ChartCollection.js',
             //Views
-            // 
+            //
             'ooiui/static/js/views/common/DropdownMessagesView.js',
             'ooiui/static/js/views/common/DropdownUserView.js',
             "ooiui/static/js/views/common/NavbarView.js",
