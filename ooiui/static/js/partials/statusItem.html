@@ -1,6 +1,44 @@
-<div>
-  <button><%= this.model.get('display_name')%> 
-    <%= this.model.get('reference_designator')%></button>
+<!-- <div>
+<button><%= this.model.get('display_name')%>
+<%= this.model.get('reference_designator')%></button>
+</div> -->
 
-</div> 
+<div class="accordion">
+    <div class="accordion-section" >
+      <div class="glass">
 
+        <!--         <a class="fa fa-caret-right accordion-section-title" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+      -->
+      <a class="fa fa-caret-right accordion-section-title" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+
+        <%= this.model.get('display_name') %>
+
+
+      </a>
+    </div>
+    </div>
+
+    <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+
+        <%= this.model.get('reference_designator') %>
+
+                margin-top: 5px;
+                box-shadow: 0px 0px 12px rgba(96, 129, 160, 1);
+                border: 1px solid rgba(127,255,255,0.25);
+                border-radius: 4px;
+              s
+              .panel-body {
+                padding: 1px;
+                background-color: rgba(171, 187, 204, 0.1);
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 1px;
+                box-shadow: 0px 0px 12px rgba(96, 129, 160, 0);
+                border: 1px solid rgba(127,255,255,0.25);
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+
+      </div>
+    </div>
+</div>
