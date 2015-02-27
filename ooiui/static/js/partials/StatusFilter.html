@@ -1,45 +1,201 @@
-<div class="form-group">
-          <label for="assetType" class="col-sm-3 control-label">Asset Type</label>
-          <div class="col-sm-6">
-            <select class="form-control" id="assetType" name="assetType">
-              <option value="glider">Glider</option>
-              <option value="all">All</option>
-              <option>Surface Buoy</option>
-              <option value="mooring">Mooring</option>
-              <option>Node</option>
-              <option>Riser</option>
-              <option>Profiler</option>
-              <option>AUV</option>
 
-            </select>
-            <span class="help-block hidden"></span>
-          </div>
-          
-</div>
-        <hr width="80%">    
-        <div class="form-group">
-          <label for="assetReport" class="col-sm-3 control-label">Asset Report</label>
-          <div class="col-sm-6 ">
-           <select class="form-control" id="assetReport" name="assetReport">
-              <option>Glider</option>
-              <option>Surface Buoy</option>
-              <option>Mooring</option>
-              <option>Node</option>
-              <option>Riser</option>
-              <option>Profiler</option>
-              <option>AUV</option>
+  <!-- ==========================================((((((((((())))))))))))==================================================== -->
+  <!-- ================================================FILTER PANEL========================================================= -->
+  <!-- ==========================================((((((((((())))))))))))==================================================== -->
 
-            </select>
-            <span class="help-block hidden"></span>
-          </div>
-            <span class="help-block hidden"></span>
-          </div>
-        </div>
+  <div class="container-fluid">
+    <div class="body-wrapper">
+      <div class="filter-panel-bottom">
+        <div class="col-md-12">
+          <div class="col-md-12">
+            <h5>Filter</h5>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="panel">
 
-        <div class="form-group">
-          <div class="col-sm-12">
-            <button type="button" id="submitButton" class="btn btn-success">Submit</button>
-            <button type="button" id="resetButton" class="btn btn-success">Reset Filter</button>
+                </div> <!-- panel -->
+              </div> <!-- col-lg-12 -->
+            </div> <!-- row -->
 
-          </div>                 
+            <!-- ==========================================(((((((((((ROW-1))))))))))))==================================================== -->
+            <div class="row">
+              <div class="col-md-4">
+                <select id="assetType"class="form-control" name="assetType">
+                  <option value="glider">Glider</option>
+                  <option value="all">All</option>
+                  <option>Surface Buoy</option>
+                  <option value="mooring">Mooring</option>
+                  <option>Node</option>
+                  <option>Riser</option>
+                  <option>Profiler</option>
+                  <option>AUV</option>
 
+                </select>
+              </div>  <!-- col-md-4 -->
+              <div class="col-md-4">
+                <select id="assetReport" class="form-control" name="assetReport">
+                   <option>Glider</option>
+                   <option>Surface Buoy</option>
+                   <option>Mooring</option>
+                   <option>Node</option>
+                   <option>Riser</option>
+                   <option>Profiler</option>
+                   <option>AUV</option>
+
+                 </select>
+              </div>  <!-- col-md-4 -->
+              <div class="col-md-2">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder="+">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>  <!-- btn-group -->
+                </div>  <!-- input-group -->
+              </div>  <!-- col-md-2 -->
+              <div class="col-md-2">
+              </div>
+            </div><!-- row -->
+
+
+            <!-- ==========================================(((((((((((ROW-2))))))))))))==================================================== -->
+            <div class="row">
+              <br />
+              <div class="col-md-4">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder="Firmware Version">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>  <!-- btn-group -->
+                </div>  <!-- input-group -->
+              </div>  <!-- col-md-4 -->
+              <div class="col-md-4">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder="Deployed">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>  <!-- btn-group -->
+                </div>  <!-- input-group -->
+              </div>  <!-- col-md-4 -->
+              <div class="col-md-2">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder=" - ">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>  <!-- btn-group -->
+                </div>  <!-- input-group -->
+              </div>  <!-- col-md-2 -->
+              <div class="col-md-2 text-center">
+                <div class="btn-group">
+                  <button id="submitButton" type="button" class="btn btn-success">Submit</button>
+                </div>
+              </div>  <!-- col-md-2 -->
+            </div>  <!-- row -->
+
+            <!-- ==========================================(((((((((((ROW-3))))))))))))==================================================== -->
+            <div class="row">
+              <br />
+              <div class="col-md-4">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder="Asset Report">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret" id="sizing-addon3"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>  <!-- input-group-btn -->
+                </div>  <!-- input-group -->
+              </div>  <!-- col-md-4 -->
+              <div class="col-md-2">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder=" = ">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>  <!-- input-group-btn -->
+                </div>  <!-- input-group -->
+              </div>  <!-- col-md-2 -->
+              <div class="col-md-2">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder=" = ">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>  <!-- input-group-btn -->
+                </div>  <!-- input-group -->
+              </div>  <!-- col-md-2 -->
+              <div class="col-md-2">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" aria-describedby="sizing-addon3" placeholder="Plot">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>  <!-- input-group-btn -->
+                </div>  <!-- input-group -->
+              </div>  <!-- col-md-2 -->
+              <div class="col-md-2 text-center">
+                <div class="btn-group">
+                  <button id="resetButton" type="button" class="btn btn-success">Reset Filter</button>
+                </div>
+              </div>  <!-- col-md-2 -->
+            </div>  <!-- row -->
+
+
+
+
+
+          </div>  <!-- col-md-12 -->
+        </div>  <!-- col-md-12 -->
+      </div>  <!-- filter-panel-bottom -->
+    </div>  <!-- body-wrapper -->
+  </div>  <!--   container-fluid -->
+  <!-- ==========================================(((((((((((END FILTER PANEL))))))))))))==================================================== -->

@@ -18,37 +18,17 @@ var StatusViews= Backbone.View.extend({
   template: JST['ooiui/static/js/partials/StatusItems.html'],
 
 
-  className: "panel",
-  events: {
-    'click #list-view' : 'onListView',
-    'click #timeline-view' : 'onTimelineView'
-  },
-
   initialize: function(){
-    // _.bindAll(this, "render", "onListView", "onTimelineView");
-    // this.viewSelection = 'timeline';
-    // this.render()
-    // //console.log(this.collection)
-    // //this.listenTo(this.collection, 'add', this.addstatus)
-    // this.addstatus(this.collection)
     _.bindAll(this, "render","filterByType");
     var self = this;
     this.collection_list =[]
     this.on("change:filterType", this.filterByType, this);
     this.collection.on("add",this.render, this)
-    this.collection.on("add", this.createSelect, this)
+    //this.collection.on("add", this.createSelect, this)
     this.collection.on("reset", this.render, this)
     return this
   },
 
-  onListView: function() {
-    this.viewSelection = 'list';
-    this.render();
-  },
-  onTimelineView: function() {
-    this.viewSelection = 'timeline';
-    this.render();
-  },
 
   render :function(){
     var collection_list = this.collection_list
@@ -69,6 +49,7 @@ var StatusViews= Backbone.View.extend({
       collection_list.push(model)
       var statusView = new StatusView({model: model});
       $('#status-view').append(statusView.el);
+
 
     })
   },
@@ -119,17 +100,13 @@ var StatusViews= Backbone.View.extend({
 //    this.trigger("change:filterType")
 //  },
   filterByType:function(type){
-    console.log(type)
-    console.log(this.collection_list)
     var Array_models = this.collection_list
     console.log('filter by type is called')
     if (type === "all"){
       this.collection.reset(Array_models);
     }
     else{
-     // console.log(this.collection)
       this.collection.reset(Array_models, { silent: true });
-     // console.log(this.collection.models)
       var filterType = type,
         filtered = _.filter(this.collection.models,function (item){
         console.log(item.get("type"))
@@ -140,9 +117,8 @@ var StatusViews= Backbone.View.extend({
             console.log(filtered)
           }
 
-   // need to fix this
-     // this.$el.find("#filter").html(this.createSelect());
      }
+
 
 
 })
@@ -152,29 +128,10 @@ var StatusView= Backbone.View.extend({
 
   initialize: function(){
     _.bindAll(this, "render");
-    // this.viewSelection = 'timeline';
     this.listenTo(ooi.views.statusFilterView, 'change:resetButton', this.reset)
     this.render()
-    //console.log(this.collection)
-    //this.listenTo(this.collection, 'add', this.addstatus)
-
   },
-  // template: JST['ooiui/static/js/partials/statusItem.html'],
-  // render: function(){
-  //   this.$el.html(this.template({model: this.model}));
-  //
-  //   if(this.viewSelection == 'list') {
-  //     this.$el.find('#list-view').toggleClass('active');
-  //     this.$el.html(this.template({model: this.model}));
-  //   }
-  //   // Timeline Event View
-  //   else {
-  //     this.$el.find('#timeline-view').toggleClass('active');
-  //     this.$el.html(this.template({model: this.model}));
-  //   }
-
   events: {
-    //"click button": "addstatus",
     "click button": "addstatus"
   },
 
@@ -185,11 +142,8 @@ var StatusView= Backbone.View.extend({
   },
 
   render: function(){
-   // console.log(this.collection)
-   //console.log(this.model)
    this.$el.html(this.template({model: this.model}))
 
-    //this.$el.html(this.template({collection: this.collection}))
   },
 
   addstatus:function(){
@@ -197,13 +151,9 @@ var StatusView= Backbone.View.extend({
 
   },
   reset:function(){
-    console.log('statusview reset called')
-
     $('#assetButton').remove()
   }
-
 })
-
 
 var StatusFilterView = Backbone.View.extend({
   collection: StatusCollection,
@@ -223,14 +173,10 @@ var StatusFilterView = Backbone.View.extend({
     this.$el.html(this.template())
   },
   setFilter: function(){
-    console.log('submit button render page')
     var assetType =$("#assetType").val()
-    console.log(assetType)
-    console.log(this.collection)
     ooi.views.statusViews.filterByType(assetType)
   },
   reset: function(){
-    console.log('reset called')
     $('#assetButton').remove()
     this.trigger('change:resetButton')
   }
