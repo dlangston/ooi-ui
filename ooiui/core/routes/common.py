@@ -48,6 +48,10 @@ def pioneer_array():
 def infrastructure():
     return render_template('common/infrastructure.html')
 
+@app.route('/statusuiicon')
+def status_ui_icon():
+    return render_template('common/statusUIIcon.html')
+
 @app.route('/NewEvent')
 def new_event():
     return render_template('common/newEvent.html')
