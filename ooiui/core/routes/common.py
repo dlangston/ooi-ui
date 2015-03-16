@@ -222,3 +222,10 @@ def post_event():
 def get_operator_event_type():
     response = requests.get(app.config['SERVICES_URL'] + '/operator_event_type', params=request.args)
     return response.text, response.status_code
+
+
+@app.route('/api/status_ui_icon', methods=['GET'])
+def get_asset():
+    value  = get_value()
+    response = requests.get(app.config['SERVICES_URL'] + '/redmine/ticket', auth=(token, ''))
+    return response.text, response.status_code
