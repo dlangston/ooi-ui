@@ -186,6 +186,7 @@ module.exports = function(grunt) {
             "ooiui/static/js/partials/FakeTable.html",
             "ooiui/static/js/partials/OrgSidebar.html",
             "ooiui/static/js/partials/StatusUIIcon.html",
+            "ooiui/static/js/partials/StatusUIIconView.html",
             "ooiui/static/js/partials/StatusUIIconHeader.html",
             "ooiui/static/js/partials/LoggedInNavItems.html"
           ],
