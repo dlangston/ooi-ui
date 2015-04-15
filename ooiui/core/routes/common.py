@@ -4,6 +4,7 @@ from werkzeug.exceptions import Unauthorized
 import requests
 import json
 import urllib
+import urllib2
 from uuid import uuid4
 
 def get_login():
@@ -34,6 +35,7 @@ def users():
 
 @app.route('/troubleTicket')
 def create_ticket():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2FtroubleTicket')
     return render_template('common/troubleTicket.html')
 
 @app.route('/login')
@@ -78,10 +80,12 @@ def new_event():
 
 @app.route('/basic.html')
 def basic():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2Fbasic')
     return render_template('common/basic.html')
 
 @app.route('/svgplot.html')
 def svg_timeseries_plot():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2Fplot')
     return render_template('common/svgplot.html')
 
 @app.route('/depthplot.html')
@@ -103,6 +107,11 @@ def FAQ():
 @app.route('/glossary.html')
 def glossary():
     return render_template('common/glossary.html')
+
+@app.route('/statusUI')
+def statusUI():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2FstatusUI')
+    return render_template('common/statusUI.html')
 
 
 @app.route('/api/organization', methods=['GET'])
@@ -138,6 +147,7 @@ def put_user(id):
     token = get_login()
     response = requests.put(app.config['SERVICES_URL'] + '/user/%s' % id, auth=(token, ''), data=request.data)
     return response.text, response.status_code
+print "More routes"
 
 @app.route('/api/user', methods=['POST'])
 @app.route('/api/user/', methods=['POST'])
@@ -252,6 +262,65 @@ def get_operator_event_type():
     response = requests.get(app.config['SERVICES_URL'] + '/operator_event_type', params=request.args)
     return response.text, response.status_code
 
+@app.route('/api/log_entry', methods=['GET'])
+def get_log_entries():
+    response = requests.get(app.config['SERVICES_URL'] + '/log_entry', params=request.args)
+    return response.text, response.status_code
+
+@app.route('/api/log_entry', methods=['POST'])
+def post_log_entry():
+    token = get_login()
+    response = requests.post(app.config['SERVICES_URL'] + '/log_entry', auth=(token, ''), data=request.data)
+    return response.text, response.status_code
+
+@app.route('/api/log_entry/<int:id>', methods=['GET'])
+def get_log_entry(id):
+    response = requests.get(app.config['SERVICES_URL'] + '/log_entry/%s' % id, params=request.args)
+    return response.text, response.status_code
+
+@app.route('/api/log_entry/<int:id>', methods=['PUT'])
+def put_log_entry(id):
+    token = get_login()
+    response = requests.put(app.config['SERVICES_URL'] + '/log_entry/%s' % id, auth=(token, ''), data=request.data)
+    return response.text, response.status_code
+
+@app.route('/api/log_entry/<int:id>', methods=['DELETE'])
+def delete_log_entry(id):
+    token = get_login()
+    response = requests.delete(app.config['SERVICES_URL'] + '/log_entry/%s' % id, auth=(token, ''))
+    return response.text, response.status_code
+
+@app.route('/api/log_entry_comment', methods=['GET'])
+def get_log_entry_comments():
+    response = requests.get(app.config['SERVICES_URL'] + '/log_entry_comment', params=request.args)
+    return response.text, response.status_code
+
+@app.route('/api/log_entry_comment', methods=['POST'])
+def post_log_entry_comment():
+    token = get_login()
+    response = requests.post(app.config['SERVICES_URL'] + '/log_entry_comment', auth=(token, ''), data=request.data)
+    return response.text, response.status_code
+
+@app.route('/api/log_entry_comment/<int:id>', methods=['GET'])
+def get_log_entry_comment(id):
+    response = requests.get(app.config['SERVICES_URL'] + '/log_entry_comment/%s' % id, params=request.args)
+    return response.text, response.status_code
+
+@app.route('/api/log_entry_comment/<int:id>', methods=['PUT'])
+def put_log_entry_comment(id):
+    token = get_login()
+    response = requests.put(app.config['SERVICES_URL'] + '/log_entry_comment/%s' % id, auth=(token, ''), data=request.data)
+    return response.text, response.status_code
+
+@app.route('/api/log_entry_comment/<int:id>', methods=['DELETE'])
+def delete_log_entry_comment(id):
+    token = get_login()
+    response = requests.delete(app.config['SERVICES_URL'] + '/log_entry_comment/%s' % id, auth=(token, ''))
+
+@app.route('/api/uframe/get_toc', methods=['GET'])
+def get_toc_list():  
+    response = requests.get(app.config['SERVICES_URL'] + '/uframe/get_toc')
+    return response.text, response.status_code
 
 @app.route('/api/uframe/glider_tracks', methods=['GET'])
 def get_glider_track():  

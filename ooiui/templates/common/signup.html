@@ -116,8 +116,8 @@
 
         <div class="form-group">
           <div class="col-sm-12">
-            <button type="button" id="submitButton" class="btn btn-success">Submit</button>
-            <button type="button" id="resetButton" class="btn btn-success">Reset</button>
+            <button type="button" id="submitButton" class="btn btn-primary">Submit</button>
+            <button type="button" id="resetButton" class="btn btn-primary">Reset</button>
 
           </div>                 
         </div>
@@ -140,6 +140,8 @@ _.extend(OOI.prototype, Backbone.Events, {
   initViews: function() {
     this.views.navbar = new NavbarView();
     $('body').prepend(this.views.navbar.el);
+    $('body').find('#hideTOC').hide()
+
     this.views.signupview = new SignUpForm({
         el: 'form',
         model: new SignUpModel()
@@ -168,6 +170,7 @@ var ooi = new OOI();
 
 $(document).ready(function () {
   ooi.start();
+
 });
 </script>
 {% endblock %}

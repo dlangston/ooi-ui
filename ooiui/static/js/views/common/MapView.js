@@ -40,18 +40,61 @@ var MapView = Backbone.View.extend({
     };
 
     //create some simple data layers
-    var layer_link = ['http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/obs']
-    var layer_list = ['RAS_RIDGE_NEXRAD'] 
-    var layer_name = ['Precipitation'] 
+
+    var nearNow = new Date();
+    nearNow.setMinutes(0);
+    nearNow.setSeconds(0);  
+
+    var layerParams = [
+                        {
+                          url:"http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/obs",
+                          name:"Precipitation",
+                          layers:"RAS_RIDGE_NEXRAD",
+                          format: "image/png",
+                          transparent: true
+                        },
+                        {
+                          url:"http://gis.srh.noaa.gov/arcgis/services/NDFDTemps/MapServer/WMSServer",
+                          name:"Temperature",
+                          layers:16,
+                          format: "image/png",
+                          transparent: true
+                        },
+                        {
+                          url:"http://coastmap.com/ecop/wms.aspx",
+                          name:"GFS WIND Model",
+                          layers:"NAM_WINDS",
+                          format: "image/png",
+                          styles : "WINDS_VERY_SPARSE_GRADIENT-False-2-0-45-High",
+                          transparent: true,
+                          time: moment(nearNow).format()
+                        },
+                        {
+                          url:"http://coastmap.com/ecop/wms.aspx",
+                          name:"Wave Watch III Model Waves",                          
+                          styles: "",
+                          layers:"WW3_WAVE_HEIGHT",
+                          format: "image/png",
+                          transparent: true,
+                          time: moment(nearNow).format()
+                        },
+                        {
+                          url:"http://coastmap.com/ecop/wms.aspx",
+                          name:"HYCOM Currents",                          
+                          styles: "CURRENTS_RAMP-Jet-False-4-True-0-2-high",
+                          layers:"HYCOM_GLOBAL_NAVY_CURRENTS",
+                          format: "image/png",
+                          transparent: true,
+                          time: moment(nearNow).format()
+                        }                       
+                      ]
+   
     var wmsLayers = {}
-    for (var i = 0; i < layer_list.length; i++) {
-      var new_layer = L.tileLayer.wms(layer_link[i], {
-        format: 'image/png',
-        transparent: true,
-        layers: layer_list[i]
-      })
-      wmsLayers[layer_name[i]] = new_layer      
-    };
+    $.each(layerParams, function( index, value ) {
+      var params = _.clone(value);
+      var new_layer = L.WMS.overlay(value.url, params)
+      wmsLayers[value.name] = new_layer      
+    });
     //wmsLayers['Glider Track'] = this.generate_glider_layer();
     this.wmsLayers = wmsLayers;
     this.mapLayerControl = L.control.layers(baseLayers,wmsLayers).addTo(this.map);
@@ -128,14 +171,43 @@ var MapView = Backbone.View.extend({
     this.collection.each(function(platform) {
       if (platform.get('coordinates')) {         
         if (platform.get('coordinates').length ==2){   
-          var full_name = platform.get('assetInfo')['name']              
+          var name = platform.get('assetInfo')['name']              
+          if (name == null){
+            name = "Undefined"          
+          }          
+
           if (platform.get('coordinates')[0]!=0 && platform.get('coordinates')[1]!=0){           
-            var platformFeature = L.marker(platform.get('coordinates'));
-            var popupContent = '<p><strong>' + full_name + '</strong><br>' +
+            var platformFeature = L.marker(platform.get('coordinates'));            
+
+            var ref_des = platform.get('ref_des')
+            if (typeof(ref_des) != "undefined"){             
+              var ref_des_split = ref_des.split("-")
+              //get the current location
+              if (!location.origin)
+                location.origin = location.protocol + "//" + location.host;
+              
+              //get the parts
+              var array = ref_des.substring(0, 2);
+              var mooring = ref_des_split[0]
+              var platform_val = ref_des_split[1]
+              if (ref_des_split.length > 2){                
+                var instrument = ref_des
+                var instrument_url = [array, mooring, platform_val , instrument].join("/");                
+              }else{
+                var instrument_url = [array, mooring, platform_val].join("/");
+              }
+              var instrument_plot = '<br><a href="/plotting/' + instrument_url + '">Plotting</a>&nbsp;&ndash;&nbsp;'
+            }else{
+              var instrument_plot = ""
+            }
+
+            var popupContent = '<p><strong>' + name + '</strong><br>' +
                 '<strong>Launch Date</strong>: '+platform.get('launch_date_time')+'<br>'+
                 'Lat: ' + platform.get('coordinates')[0] + '&nbsp;|&nbsp;Lon: ' + platform.get('coordinates')[1] +
-                '<br><a href="/streams?' + platform.get('ref_des') + '">Data Catalog</a>&nbsp;&ndash;&nbsp;' +
+                instrument_plot+
+                '<br><a href="/streams">Data Catalog</a>&nbsp;&ndash;&nbsp;' +
                 '<a href="/assets/list?' + platform.get('ref_des') + '">Asset Management</a></p>';
+
                 platformFeature.bindPopup(popupContent);
             markerCluster.addLayer(platformFeature);
           }

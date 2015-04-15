@@ -1,3 +1,6 @@
+.fa-spinner{
+  color:#337ab7;
+}
 .breadcrumb{
 	margin-top: -17px;
 	padding: 5px 15px;
@@ -19,7 +22,7 @@
 	margin-bottom: -2px;
 }
 .modal-content{
-  width: 700px;
+  /*width: 700px;*/
 }
 .modal-backdrop {background: none;}
 
@@ -43,7 +46,7 @@ ul.jqtree-tree li.jqtree-selected > .jqtree-element, ul.jqtree-tree li.jqtree-se
 	background: #EEE !important;
 }
 .backgrid td, .backgrid th{
-	max-width: 275px;
+	max-width: 205px;
 }
 .backgrid{
 	font-size: 12px !important;

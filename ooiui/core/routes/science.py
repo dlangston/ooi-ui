@@ -17,9 +17,11 @@ from datetime import datetime,timedelta
 import time
 import numpy as np
 import math
+import urllib2
 
 @app.route('/')
 def new_index():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2Fscience%2Fworld')
     return render_template('science/index.html')
 
 @app.route('/landing/pioneer')
@@ -29,10 +31,12 @@ def landing_pioneer():
 @app.route('/assets/list')
 @app.route('/assets/list/')
 def instr_index():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2Fassets')
     return render_template('asset_management/assetslist.html')
 
 @app.route('/events/list/')
 def event_list():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2Fevents')
     return render_template('asset_management/eventslist.html')
 
 @app.route('/event/<int:id>', methods=['GET'])
@@ -46,9 +50,21 @@ def event_new(new,aid,aclass):
     return render_template('asset_management/event.html',id=str(new),assetid=aid,aclass=str(aclass))
 
 @app.route('/streams')
-@app.route('/streams/')
 def streams_page():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2Fstreams')
     return render_template('science/streams.html')
+
+@app.route('/plotting', methods=['GET'])
+@app.route('/plotting/', methods=['GET'])
+def show_plotting_no_path():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2Fplotting')
+    return plotting_page(None)
+
+@app.route('/plotting/<path:path>', methods=['GET'])
+def plotting_page(path):
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2Fplotting')
+    print path
+    return render_template('science/plotting.html')
 
 @app.route('/getdata/')
 def getData():
@@ -91,12 +107,22 @@ def array_proxy():
     response = requests.get(app.config['SERVICES_URL'] + '/arrays', params=request.args)
     return response.text, response.status_code
 
+@app.route('/api/uframe/get_structured_toc')
+def structured_toc_proxy():
+    response = requests.get(app.config['SERVICES_URL'] + '/uframe/get_structured_toc', params=request.args)
+    return response.text, response.status_code
+
 #old
 @app.route('/api/platform_deployment')
 def platform_deployment_proxy():
     response = requests.get(app.config['SERVICES_URL'] + '/platform_deployments', params=request.args)
     return response.text, response.status_code
 
+@app.route('/api/display_name')
+def display_name():
+    ref = request.args['reference_designator'];
+    response = requests.get(app.config['SERVICES_URL'] + '/display_name'+"?reference_designator="+ref, params=request.args)
+    return response.text, response.status_code
 
 #Assets
 @app.route('/api/asset_deployment', methods=['GET'])
@@ -146,9 +172,15 @@ def asset_event_post():
     response = requests.post(app.config['SERVICES_URL'] + '/uframe/events', data=request.data)
     return response.text, response.status_code
 
+@app.route('/api/events', methods=['GET'])
+def get_event_by_ref_des():
+    response = requests.get(app.config['SERVICES_URL'] + '/uframe/events?ref_des=%s' % request.args.get('ref_des'), data=request.args)
+    return response.text, response.status_code
+
 
 @app.route('/opLog.html')
 def op_log():
+    urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2FopLog')
     return render_template("common/opLog.html")
 
 @app.route('/api/uframe/stream')
@@ -178,9 +210,9 @@ def metadata_times_proxy(stream_name,reference_designator):
 @app.route('/api/uframe/get_csv/<string:stream_name>/<string:reference_designator>/<string:start>/<string:end>')
 def get_csv(stream_name, reference_designator,start,end):
     token = get_login()
-    dpa = "0"
+    dpa = "1"
     url = app.config['SERVICES_URL'] + '/uframe/get_csv/%s/%s/%s/%s/%s' % (stream_name, reference_designator,start,end,dpa)
-    req = requests.get(url, auth=(token, ''), stream=True,params=request.args)
+    req = requests.get(url, auth=(token, ''), stream=True)
     return Response(stream_with_context(req.iter_content(chunk_size=1024*1024*4)), headers=dict(req.headers))
 
 @app.route('/api/uframe/get_json/<string:stream_name>/<string:reference_designator>/<string:start>/<string:end>')
@@ -207,7 +239,7 @@ def get_profiles(stream_name, reference_designator):
 @app.route('/svg/plot/<string:instrument>/<string:stream>', methods=['GET'])
 def get_plotdemo(instrument, stream):
     token = get_login()
-    import time    
+    import time
     t0 = time.time()
     req = requests.get(app.config['SERVICES_URL'] + '/uframe/plot/%s/%s' % (instrument, stream), auth=(token, ''), params=request.args)
     t1 = time.time()

@@ -1,6 +1,6 @@
 "use strict";
 /*
-* ooiui/static/js/views/c2/ArraySideBarView.js
+* ooiui/static/js/views/c2/PlatformInstrumentsView.js
 * View definitions for charts
 *
 * Dependencies
@@ -60,37 +60,36 @@ var PlatformInstrumentsView = Backbone.View.extend({
     });
 
     var columns = [{
-            name: "display_name", // The key of the model attribute
-            label: " Instrument Name", // The name to display in the header
-            editable: false,
-            cell: "string"
-        }, {
-            name: "operational_status",
-            label: "Status",
-            editable: false,
-            cell: HtmlCell,
-            formatter: _.extend({}, Backgrid.Cell.prototype, {
-              fromRaw: function (rawValue, model) {
-                if(rawValue =='Online'){
-                    return "<i style='pointer-events: none; font-size:20px;float:right;padding-right: 25px;' class='fa fa-thumbs-up c2-online'></i>";
-                }
-                else if(rawValue =='Offline'){
-                    return "<i style='pointer-events: none; font-size:20px;float:right;padding-right: 25px;' class='ffa fa-thumbs-down c2-offline'></i>";
-                }
-                else{
-                    return "<i style='pointer-events: none; font-size:20px;float:right;padding-right: 25px;' class='fa fa-question-circle c2-unknown'></i>";
-                }
+          name: "display_name", // The key of the model attribute
+          label: " Instrument Name", // The name to display in the header
+          editable: false,
+          cell: "string"
+      }, {
+          name: "operational_status",
+          label: "Status",
+          editable: false,
+          cell: HtmlCell,
+          formatter: _.extend({}, Backgrid.Cell.prototype, {
+            fromRaw: function (rawValue, model) {
+              if(rawValue =='Online'){
+                  return "<i style='pointer-events: none; font-size:20px;float:right;padding-right: 25px;' class='fa fa-thumbs-up c2-online'></i>";
               }
-            }),
-      },
-      {
+              else if(rawValue =='Offline'){
+                  return "<i style='pointer-events: none; font-size:20px;float:right;padding-right: 25px;' class='fa fa-thumbs-down c2-offline'></i>";
+              }
+              else{
+                  return "<i style='pointer-events: none; font-size:20px;float:right;padding-right: 25px;' class='fa fa-question-circle c2-unknown'></i>";
+              }
+            }
+          })
+      },{
           name: "operational_status",
           label: "Commands",
           editable: false,
           cell: HtmlCell,
           formatter: _.extend({}, Backgrid.Cell.prototype, {
             fromRaw: function (rawValue, model) {
-               return "<i id='inst_mission_icon' style='font-size:19px;color:#A9A9A9;float:right;padding-right: 30px;' class='fa fa-toggle-off'></i>";
+               return "<button type='button' style='float:right' id='inst_mission_icon' class='btn btn-default'><i style='font-size:19px;color:#A9A9A9;float:right;pointer-events: none;' class='fa fa-toggle-off'></i></button>";
             }
           }),
       }];
@@ -117,7 +116,8 @@ var PlatformInstrumentsView = Backbone.View.extend({
 
               this.CommandView.show({
                 message: "<i>None at this time</i>",
-                command_options: "<i style='color:#337ab7;' class='fa fa-spinner fa-spin fa-5x'></i>",
+                parameter_options: "",
+                command_options: "<i style='color:#337ab7;margin-left:20px' class='fa fa-spinner fa-spin fa-3x'></i>",
                 variable: this.model.attributes.reference_designator,
                 ctype: "instrument",
                 title: this.model.attributes.display_name,
