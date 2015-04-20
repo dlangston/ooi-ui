@@ -95,13 +95,22 @@ var TOCView = Backbone.View.extend({
         }  
         subview=null;      
       }
-      
     });
 
     //self.$el.find('#instrument_'+model.get('reference_designator')+"_body").append(subview.el);
   },
   filterToc: function(){
     var self = this
+    /*
+    this.$el.find('#search-filter').keyup(function () {
+        var rex = new RegExp($(this).val());
+        self.$el.find("li ").hide();
+        self.$el.find("li ").filter(function () {
+            console.log("search...",rex)
+            return rex.test($(this).text());
+        }).show();
+    })*/
+
   },
   template: JST['ooiui/static/js/partials/TOC.html'],
   renderArrays: function(){
