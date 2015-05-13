@@ -23,6 +23,7 @@ module.exports = function(grunt) {
             "ooiui/static/js/partials/NewEvent.html",
             "ooiui/static/js/partials/ModalDialog.html",
             "ooiui/static/js/partials/TermsDialog.html",
+            "ooiui/static/js/partials/Banner.html",              
             "ooiui/static/js/partials/Navbar.html",
             "ooiui/static/js/partials/MenuToggle.html",
              "ooiui/static/js/partials/LoggedInNavItems.html"
@@ -545,6 +546,7 @@ module.exports = function(grunt) {
             // Views
             'ooiui/static/js/views/common/DropdownMessagesView.js',
             'ooiui/static/js/views/common/DropdownUserView.js',
+            "ooiui/static/js/views/common/BannerView.js",              
             "ooiui/static/js/views/common/NavbarView.js",
             "ooiui/static/js/views/common/TOCView.js",
             "ooiui/static/js/views/common/MapView.js",
@@ -1128,7 +1130,9 @@ module.exports = function(grunt) {
             "ooiui/static/lib/bootstrap-select/dist/css/bootstrap-select.css",
             "ooiui/static/css/common/backgridall.min.css",
             "ooiui/static/css/filtrify/css/filtrify.css",
-            'ooiui/static/lib/bootstrap-editable-table/bootstrap-editable-table.css'
+            'ooiui/static/lib/bootstrap-editable-table/bootstrap-editable-table.css',
+            "ooiui/static/css/custom-bs/custom.css"  
+              
           ],
           "ooiui/static/css/compiled/signup.css" : [
             "ooiui/static/css/common/userSignUpForm.css",
@@ -1257,7 +1261,7 @@ module.exports = function(grunt) {
         }
       },
       scripts: {
-        files: ['Gruntfile.js', '**/views/*/*.js', '**/models/*/*.js', '**/ooi.js', '**/common/*.css'],
+        files: ['Gruntfile.js', '**/views/*/*.js', '**/models/*/*.js', '**/ooi.js', '**/common/*.css', '**/ooi-landing/*.css', '**/custom-bs/*.css'],
         tasks: ['concat'],
         options: {
         }
