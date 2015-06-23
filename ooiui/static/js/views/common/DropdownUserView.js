@@ -14,13 +14,13 @@
 var DropdownUserView = Backbone.View.extend({
   tagName: 'li',
   className: 'dropdown',
-  id: 'dropdownUser',
+  // id: 'dropdownUser', // adjusts top: tag in scienceLayout.css
   events: {
     'click #login' : 'login',
     'click #logout' : 'logout'
   },
   login: function() {
-    var self = this;
+    var self = this; 
     var loginview = new LoginView({
       model: self.model,
     });
