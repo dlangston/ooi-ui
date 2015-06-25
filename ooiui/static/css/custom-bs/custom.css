@@ -129,7 +129,7 @@ div#aa-panel {
   max-width: 100%;
   width: 100%;
   position: fixed;
-  height: 127px;
+  height: 0;
   z-index: 999;
 	background-color: #FFF;
 	top: 0;
