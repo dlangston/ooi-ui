@@ -130,8 +130,9 @@ div#aa-panel {
   width: 100%;
   position: fixed;
   height: 127px;
-  z-index: 1001;
+  z-index: 999;
 	background-color: #FFF;
+	top: 0;
 }
 
 /* ~ adjust #wrapper & #page-content-wrapper for content below the banner & navbar ~ */ 
@@ -185,10 +186,11 @@ div#wrapper-asset {
 picture#banner-img {
 	position: absolute;
 	padding-left: 25%;
+	z-index: -1;
 }
 
 ul#fadein-left {
-	padding-top: 10px;
+	padding-top: 5px;
 }
 
 /* @media screen and (max-width: 800px) { */
@@ -212,7 +214,9 @@ ul#fadein-left {
 }
 #fadein-left > li {
 	display: table-cell; 
-	width: 33%;
+	width: 50%;
+	padding-right: 50px;
+	vertical-align: top;
 }
 
 /* @media screen and (max-width: 1200px) { */
@@ -241,7 +245,7 @@ ul#fadein-left {
 	/* display: inline; */
 	/* position: relative; */
 	text-align: center;
-
+	padding-right: 25%;
   color: #000;
   opacity: 0.3;
   font-size: 30px;
@@ -298,9 +302,10 @@ ul#fadein-left {
 ******** Navbar ********
 ***********************/
 .navbar-fixed-top {
-  z-index: 1001;
-	padding-right: 30px; 
 	width: 100% ; 
+	padding-right: 20px;
+	z-index: 998;
+	/* padding-right: 30px;  */
 	/* display: table;   */
   /* border-width: 0 0 1px;  */
   /* position: inherit; */
