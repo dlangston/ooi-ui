@@ -14,9 +14,9 @@
 
       <li class="left">
         <a href="/">
-					<!-- <picture> -->
-					<picture style="position:absolute;">
-					<source srcset="/img/logos-banners/ooi-sizes/ooi-logo-210_1200.png" media="(min-width: 1200px)">
+					<picture>
+					<!-- <picture style="position:absolute;"> -->
+					<source srcset="/img/logos-banners/ooi-sizes/ooi-logo-220_1200.png" media="(min-width: 1200px)">
 					<source srcset="/img/logos-banners/ooi-sizes/ooi-logo-175_800.png" media="(min-width: 800px)">
 					<source srcset="/img/logos-banners/ooi-sizes/ooi_800.png" media="(min-width: 600px)">
 					<source srcset="/img/logos-banners/ooi-sizes/ooi_600.png" media="(min-width: 400px)">
@@ -78,7 +78,7 @@
 
  <script>
 if (matchMedia) {
-	var mq = window.matchMedia("(min-width: 800px)");
+	var mq = window.matchMedia("(min-width: 1200px)");
 	mq.addListener(WidthChange);
 	WidthChange(mq);
 }
@@ -102,13 +102,13 @@ $(document).ready(function() {
 else {
 	$(document).ready(function() {
 			var span = document.getElementById("lg");
-	span.style.fontSize = "15px";
+	span.style.fontSize = "25px";
 	span.innerHTML = "<%= bannerTitle %>";
 
     var words = $('lg').text().split(' ');
     var html = '';
     $.each(words, function() {
-				html += '<span style="font-size:30px;">'+this.substring(0,1)+'</span>'+this.substring(1) + ' ';
+				html += '<span style="font-size:50px;">'+this.substring(0,1)+'</span>'+this.substring(1) + ' ';
 			});
     $('lg').html(html);
 		});

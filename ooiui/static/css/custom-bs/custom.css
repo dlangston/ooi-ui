@@ -214,7 +214,7 @@ ul#fadein-left {
 }
 #fadein-left > li {
 	display: table-cell; 
-	width: 50%;
+	width: 31%;
 	padding-right: 50px;
 	vertical-align: top;
 }
@@ -225,11 +225,11 @@ ul#fadein-left {
 /* } */
 /* } */
 
-@media screen and (max-width: 800px) {
-	#fadein-left > li.banner-title {
-	line-height: .9;
-	}
-}
+/* @media screen and (max-width: 800px) { */
+/* 	#fadein-left > li.banner-title { */
+/* 	line-height: .9; */
+/* 	} */
+/* } */
 
 /* @media screen and (max-width: 600px) { */
 /* 	#fadein-left > li.banner-title { */
@@ -244,8 +244,8 @@ ul#fadein-left {
   /* padding-top: 5px; */
 	/* display: inline; */
 	/* position: relative; */
-	text-align: center;
-	padding-right: 25%;
+	/* text-align: center; */
+	/* padding-right: 25%; */
   color: #000;
   opacity: 0.3;
   font-size: 30px;
