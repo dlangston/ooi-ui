@@ -247,16 +247,16 @@ ul#fadein-left {
 	/* text-align: center; */
 	/* padding-right: 25%; */
   color: #000;
-  opacity: 0.3;
   font-size: 30px;
   font-family: Athelas;
 	font-weight: normal;
  	text-transform: uppercase;
+  opacity: 0.3;
   list-style: none;
- 	animation: fadein 7s;
-	-moz-animation: fadein 7s; /* Firefox */
-	-webkit-animation: fadein 7s; /* Safari and Chrome */
-	-o-animation: fadein 7s; /* Opera */
+ 	animation: fadein 3s;
+	-moz-animation: fadein 3s; /* Firefox */
+	-webkit-animation: fadein 3s; /* Safari and Chrome */
+	-o-animation: fadein 3s; /* Opera */
 }
 @keyframes fadein {
     from {
@@ -290,7 +290,12 @@ ul#fadein-left {
         opacity: 2;
     }
 }
-
+.bannerFont {
+	text-size: 25px;
+}
+.bannerFont2 {
+	text-size: 40px;
+}
 /*.text-body {
   display: inline;
   color: #000;

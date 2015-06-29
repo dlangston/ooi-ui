@@ -27,7 +27,15 @@
 
       <li class="center banner-title">
 				<lg id="lg"></lg>
-      </li>
+					<!-- <picture> -->
+					<!-- <!&#45;&#45; <picture style="position:absolute;"> &#45;&#45;> -->
+					<!-- <source srcset="/img/logos&#45;banners/titles/scienceMapTitle&#45;220_1200.png" media="(min&#45;width: 1200px)"> -->
+					<!-- <source srcset="/img/logos&#45;banners/titles/scienceMapTitle&#45;180_800.png" media="(min&#45;width: 800px)"> -->
+					<!-- <source srcset="/img/logos&#45;banners/titles/scienceMapTitle&#45;130_600.png" media="(min&#45;width: 600px)"> -->
+					<!-- <img srcset="/img/logos&#45;banners/titles/scienceMapTitle&#45;220_1200.png 60w, /img/logos&#45;banners/titles/scienceMapTitle&#45;220_1200.png 100w, /img/logos&#45;banners/titles/scienceMapTitle&#45;220_1200.png 160w, /img/logos&#45;banners/titles/scienceMapTitle&#45;220_1200.png 200w, /img/logos&#45;banners/titles/scienceMapTitle&#45;220_1200.png 250w"> -->
+					<!-- </picture> -->
+          <!--  -->
+			</li>
 
       <li class="right">
 				<a href="/">
@@ -40,8 +48,6 @@
 					</picture>
           <!-- <img src="/img/logos&#45;banners/OOI_Logo.svg" style="width:150px;"> -->
         </a>
-
-
         <!-- <a href="http://oceanleadership.org/"> -->
         <!--   <img src="/img/logos&#45;banners/ocean&#45;leadership.png"> -->
         <!-- </a> -->
@@ -58,7 +64,6 @@
 					</picture>
           <!-- <img src="/img/logos&#45;banners/OOI_Logo.svg" style="width:150px;"> -->
         </a>
-
         <!-- <a id="imgNsf" href="http://www.nsf.gov/"> -->
         <!--   <img id="imgNsf" src="/img/logos&#45;banners/nsf.png"> -->
 				<!-- </a> -->
@@ -68,8 +73,6 @@
   <!-- </div> -->
 </div>
 
-
-
  <script>
 if (matchMedia) {
 	var mq = window.matchMedia("(min-width: 1200px)");
@@ -78,10 +81,16 @@ if (matchMedia) {
 }
 
 function WidthChange(mq) {
-if (mq.matches) {
+var w = $(window).width();
+	
+// if (mq.matches) {
 $(document).ready(function() {
-
 	var span = document.getElementById("lg");
+
+	
+	if (w >= 1080) {
+console.log(w);
+
 	span.style.fontSize = "30px";
 	span.innerHTML = "<%= bannerTitle %>";
 
@@ -91,11 +100,11 @@ $(document).ready(function() {
       	html += '<span style="font-size:60px;">'+this.substring(0,1)+'</span>'+this.substring(1) + ' ';
    		});
 		$('lg').html(html);
-	});
-}
-else {
-	$(document).ready(function() {
-			var span = document.getElementById("lg");
+	}
+
+	 else if (w <= 1079) {
+console.log(w);
+		 
 	span.style.fontSize = "25px";
 	span.innerHTML = "<%= bannerTitle %>";
 
@@ -105,9 +114,100 @@ else {
 				html += '<span style="font-size:50px;">'+this.substring(0,1)+'</span>'+this.substring(1) + ' ';
 			});
     $('lg').html(html);
+	}
+
+
+// }
+else {
+	$(document).ready(function() {
+			var span = document.getElementById("lg");
+	span.style.fontSize = "15px";
+	span.innerHTML = "<%= bannerTitle %>";
+
+    var words = $('lg').text().split(' ');
+    var html = '';
+    $.each(words, function() {
+				html += '<span style="font-size:30px;">'+this.substring(0,1)+'</span>'+this.substring(1) + ' ';
+			});
+    $('lg').html(html);
 		});
 	}
+	});
+
 }
+
+
+// var w = $(window).width();
+// // console.log(w);
+//
+// $(window).on("resize", widthMethod);
+//
+// function widthMethod(e) {
+// var w = $(window).width();
+// if (w >= 1100) {
+// $(document).ready(function() {
+//
+// 	var span = document.getElementById("lg");
+// 	span.style.fontSize = "30px";
+// 	span.innerHTML = "<%= bannerTitle %>";
+//
+//     var words = $('lg').text().split(' ');
+//     var html = '';
+//     $.each(words, function() {
+//       	html += '<span style="font-size:60px;">'+this.substring(0,1)+'</span>'+this.substring(1) + ' ';
+//    		});
+// 		$('lg').html(html);
+// 	});
+// }
+// else if (w <= 1099 && w >= 1000) {
+// $(document).ready(function() {
+//
+// 	var span = document.getElementById("lg");
+// 	span.style.fontSize = "26px";
+// 	span.innerHTML = "<%= bannerTitle %>";
+//
+//     var words = $('lg').text().split(' ');
+//     var html = '';
+//     $.each(words, function() {
+//       	html += '<span style="font-size:52px;">'+this.substring(0,1)+'</span>'+this.substring(1) + ' ';
+//    		});
+// 		$('lg').html(html);
+// 	});
+// }
+// else if (w <= 999 && w >= 960) {
+// $(document).ready(function() {
+//
+// 	var span = document.getElementById("lg");
+// 	span.style.fontSize = "22px";
+// 	span.innerHTML = "<%= bannerTitle %>";
+//
+//     var words = $('lg').text().split(' ');
+//     var html = '';
+//     $.each(words, function() {
+//       	html += '<span style="font-size:44px;">'+this.substring(0,1)+'</span>'+this.substring(1) + ' ';
+//    		});
+// 		$('lg').html(html);
+// 	});
+// }
+// else if (w <= 959 && w >= 800) {
+// $(document).ready(function() {
+//
+// 	var span = document.getElementById("lg");
+// 	span.style.fontSize = "20px";
+// 	span.innerHTML = "<%= bannerTitle %>";
+//
+//     var words = $('lg').text().split(' ');
+//     var html = '';
+//     $.each(words, function() {
+//       	html += '<span style="font-size:40px;">'+this.substring(0,1)+'</span>'+this.substring(1) + ' ';
+//    		});
+// 		$('lg').html(html);
+// 	});
+// }
+//
+//
+//
+// }//end widthMethod 
 </script>
 
 
