@@ -39,7 +39,6 @@ var AssetTableHeaderView = ParentAssetView.extend({
         assetCreatorModal.setupFields();
         return this;
     }
-
 });
 
 //Container for the list of all assets.

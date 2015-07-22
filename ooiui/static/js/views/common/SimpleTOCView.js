@@ -172,10 +172,10 @@ var BaseTOCView = Backbone.View.extend({
 //  ArrayItemView
 //--------------------------------------------------------------------------------
 
-var ArrayItemView = BaseTOCView.extend({  
+var ArrayItemView = Backbone.View.extend({  
   className: "panel panel-default",
   subview:[],
-  platformList: [],
+  platformList: {},
   initialize: function() {
     this.nestedView = new NestedItemView();
     this.model.set('reference_designator', this.model.get('array_code'));
@@ -220,7 +220,8 @@ var ArrayItemView = BaseTOCView.extend({
             total_child+=1;
             self.platformList.push(ref_des)
           }
-        }
+        }  
+      //}
     });
 
     this.$el.find("#parentBadge").text(total_parents);
@@ -278,8 +279,7 @@ var ArrayItemView = BaseTOCView.extend({
 //  PlatformDeploymentItemView
 //--------------------------------------------------------------------------------
 
-var PlatformDeploymentItemView = BaseTOCView.extend({
-  platformType: "parent-platform",
+var PlatformDeploymentItemView = Backbone.View.extend({
   tagName:'li',
   events: {
     'click' : 'onClick' 
@@ -287,13 +287,31 @@ var PlatformDeploymentItemView = BaseTOCView.extend({
   initialize: function(){
     var self = this;
     _.bindAll(this, "render", "onClick");
-    this.render();    
+    this.nestedView = new NestedItemView({
+      level: 3
+    });
+    this.modifyDisplayName();
+    this.render();
+  },
+  modifyDisplayName: function() {
+    var self = this;
+    var display_name = this.model.get('display_name') || "";
+    //check for station
+    if(display_name.indexOf('-') >= 0) {
+      var items = display_name.split(' - ');
+      //this.model.set('display_name', items[items.length - 1]);
+      this.model.set('display_name', display_name);
+      self.platformType = "child";
+    } else {      
+      this.$el.toggleClass('parent-platform');
+      self.platformType = "parent-platform";      
+    }
   },
   onClick: function(e) { 
     console.log("platform");
     ooi.trigger('platformDeploymentItemView:platformSelect', this.model); 
   },  
-  template: JST['ooiui/static/js/partials/PlatformItem.html'],
+  template: JST['ooiui/static/js/partials/ArrayItem.html'],
   render: function(){
     var self = this;    
     this.$el.html(this.template({data: this.model,type:self.platformType}));

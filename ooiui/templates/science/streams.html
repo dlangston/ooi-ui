@@ -175,6 +175,22 @@ $(document).ready(function() {
             $(this).hide();
             updateCollection( showStreams )
             });
+  {# $('#second-plot-panel').hide(); #}
+  {# $('#bottom-row').hide(); #}
+  {# ooi.start(); #}
+  {# $('#download-plot').click(function(event) { #}
+  {#   event.preventDefault(); #}
+  {#   ooi.trigger('ooi:downloadPlot'); #}
+  {# }); #}
+  {# $('#add-plot').click(function(event) { #}
+  {#   event.preventDefault(); #}
+  {#   ooi.trigger('ooi:addPlot'); #}
+  {# }); #}
+  {# $('#stream-search').keyup(function(e) { #}
+  {#   if(e.keyCode == 13) { #}
+  {#     ooi.trigger('ooi:streamSearch', $(e.target).val()); #}
+  {#   } #}
+  {# }); #}
 
         $('#stream-search').keyup(function(e) {
                 $("#search-clear").toggle(Boolean($(this).val()));
