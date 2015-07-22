@@ -22,7 +22,7 @@ import urllib2
 @app.route('/')
 def new_index():
     urllib2.urlopen(app.config['GOOGLE_ANALYTICS_URL'] + '&dp=%2Fscience%2Fworld')
-    return render_template('science/index.html')
+    return render_template('ooiLanding/index.html')
 
 @app.route('/landing/pioneer')
 def landing_pioneer():
