@@ -53,7 +53,7 @@ _.extend(OOI.prototype, Backbone.Events, {
 
   start: function() {
     this.login.fetch({async:false});
-    this.views.banner = new BannerView({bannerTitle});
+    this.views.banner = new BannerView({bannerTitle: bannerTitle});
     $('body').prepend(this.views.banner.el);
 
     this.views.navbar = new NavbarView({
