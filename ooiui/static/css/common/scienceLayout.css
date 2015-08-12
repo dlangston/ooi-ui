@@ -50,8 +50,7 @@
         height: 94%;
         margin-left: -350px;
         overflow-y: auto;
-        /*background: #000;*/ /*black background*/
-
+        background: #FFF;
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;

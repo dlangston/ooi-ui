@@ -52,8 +52,8 @@ margin: 0 0 10px
 }
 
 #navToc>li {
-    float: none
-}
+    float: none;
+  }
 
 #navToc>li>a {
     margin-bottom: 2px
@@ -97,14 +97,37 @@ margin: 0 0 10px
 }
 
 li.highlight-row > label {
-
     background-color: #004773 !important;
     color: #fff!important;
 }
-
+/* level 2 */
 li.platform {
     width:300px;
+	background-color: #E9E9E9;	
+  border-bottom: 1px solid #FFF;
+	border-radius:5px;
+    color: #353840;
+  font-size: 14px;
+  text-decoration: none;
+	font-weight: 300;	
+
+
 }
-li.instrument {
+/* level 3 */
+li.instrument { 
     width:300px;
 }
+
+/* ul#tocNav > li { */
+/* 	background-color: #6080A1; */
+/*   border-radius: 5px; */
+/* } */
+ul#tocNav > li >ul {
+	border-bottom: 1px solid #7E9CD9;
+	border-radius:5px;
+}
+ul#tocNav > li >ul {
+	border-bottom: 1px solid #FFF;
+	border-radius:5px;
+}
+
