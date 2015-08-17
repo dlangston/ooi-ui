@@ -323,12 +323,10 @@ var MapView = Backbone.View.extend({
     });
 
     markerCluster.on('clustermouseout', function (e) {
-      if (map.getZoom() === 3 || map.getZoom()==4 ) {
         if (popup && map) {
           map.closePopup(popup);
           popup = null;
         }
-      }
     });
 
     var res_des_list = this.collection.map(function(model){
