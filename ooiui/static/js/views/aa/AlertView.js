@@ -253,7 +253,7 @@ var AlertFilterView = Backbone.View.extend({
             //check to see if the condtion met item has ben clicked and open triggered events
             if(e.target.id=='condition_met'){
                this.triggeredalertView = new TriggeredAlertDialogView();
-                $('.container-fluid').first().append(this.triggeredalertView.el);
+                $('#wrapper').first().append(this.triggeredalertView.el);
 
                 this.triggeredalertView.show({
                   instrument: "Instrument Name: "  + this.model.attributes.Instrument,
