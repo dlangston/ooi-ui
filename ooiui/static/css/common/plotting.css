@@ -385,3 +385,15 @@
   table#eventsTable {
     width: 100% !important;
   }
+
+   /*************************
+   **** Plotting Controls ***
+   *************************/
+  .control-panel {
+    margin-bottom: 5px;
+  }
+
+  #download-options ul {
+    margin-top: 6px;
+    padding-left: 0px;
+  }
