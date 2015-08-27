@@ -102,9 +102,14 @@
 
   /* SVG Controlls */
   div#control-heading {
-    border: 1px solid #7E9CD9;
+    border: 1px solid #D1DAF5;
     background-color: #fff!important;
   }
+  li#ref_des_stream_outline {
+    font-weight: 400px;
+    padding-left: 10px;
+  }
+  
   label#plot-type,
   label#yvar0-select-default-text,
   label#start-time,
