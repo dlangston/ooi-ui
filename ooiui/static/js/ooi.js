@@ -128,6 +128,6 @@ $(document).ready(function () {
     $('#search').width = "300px";
     $('#search-clear').hide();
     $('label.tree-toggler').click(function () {
-        $(this).parent().children('ul.tree').toggle(300);
+        $(this).parent().children('ul.tree');
     });
 });

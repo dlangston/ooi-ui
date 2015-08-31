@@ -144,7 +144,8 @@ var ArrayContainerView = Backbone.View.extend({
     template: JST['ooiui/static/js/partials/ArrayItem.html'],
     render: function(){
         this.$el.html( this.template(this.model.toJSON()) );
-        this.$el.append('<li class="divider"></li>');
+        // this.$el.append('<li class="divider"></li>');
+        this.$el.addClass('navLine');
         return this;
     },
     derender: function() {
@@ -210,7 +211,7 @@ var AssetItemView = Backbone.View.extend({
             this.$el.attr('class', 'instrument');
             this.$el.html( this.template(this.model.toJSON()) );
             var label = (instrumentName == undefined) ? instrumentId : instrumentName;
-            this.$el.append('<label class="instrument tree-toggler nav-header">'+ label + '</label><ul id="'+ instrumentId +'" class="nav nav-list tree" style="display: none"></ul>');
+            this.$el.append('<label class="instrument tree-toggler nav-header">'+ label + '</label><ul id="'+ instrumentId +'" class="nav nav-list tree instrumentStyle" style="display: none"></ul>');
         }
         return this;
     }
@@ -303,6 +304,7 @@ var NestedTocItemView = Backbone.View.extend({
   onClick: function(e) {
     e.stopPropagation();
     this.toggle(e);
+    
     if(this.level == 1){
       ooi.trigger('platformDeploymentItemView:platformSelect', this.model);
     }
