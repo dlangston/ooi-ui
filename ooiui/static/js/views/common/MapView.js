@@ -349,14 +349,18 @@ var MapView = Backbone.View.extend({
         var level_two = [];
         var level_one = [];
         var names = [];
+        var asset_list;
           
         // Level One
         for (var i = 0; i < children.length; i++) {
           if(children[i].options.alt.indexOf('-') === -1 && map.getZoom() == 2) {
+
             level_one.push(children[i].options.alt);
+            asset_list = level_one;
           }
-          if(map.getZoom() === 10){
+          if(children[i].options.alt.indexOf('-') > -1 && map.getZoom() === 10){
             level_two.push(children[i].options.alt);
+            asset_list = level_two
           }
         }
         console.log("zoom = "+map.getZoom());
@@ -410,10 +414,11 @@ var MapView = Backbone.View.extend({
         //generate normal popup
         popup = L.popup({offset: new L.Point(0, -20)})
           .setLatLng(a.latlng)
-          .setContent('<div class="cluster-popup"><h4>'+title+'<img id="clusterImg" src="/img/sciMap/OOI_Logo.png"></h4><p>'+a.layer.getAllChildMarkers().length+' assets'+'</p></div><p><div id="names">names = '+level_one+'</p></div>')
+          .setContent('<div class="cluster-popup"><h4>'+title+'<img id="clusterImg" src="/img/sciMap/OOI_Logo.png"></h4><p>'+a.layer.getAllChildMarkers().length+' assets'+'</p></div><p><div id="names">names = '+asset_list+'</p></div>')
           .openOn(map);
           // console.log(a.layer.getAllChildMarkers());
       }
+      asset_list = null;
 
 
 
