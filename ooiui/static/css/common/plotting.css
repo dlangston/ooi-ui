@@ -385,3 +385,7 @@
   table#eventsTable {
     width: 100% !important;
   }
+
+  #decimatedWarn {
+    float: right;
+  }
