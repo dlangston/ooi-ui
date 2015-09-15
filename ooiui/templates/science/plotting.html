@@ -72,11 +72,12 @@
         <div class="new-heading">
           Graph
         </div>
-
         <div class="panel-body">
           <!--  Plot section NORMAL   -->
           <div id="plot-view">
-            <img id="plottingImg" src="/img/plotting/graph.png">
+            {# <i class="fa fa-bar-chart" style="margin-left:50%;font-size:90px;"> </i>#}
+            {# <img src="/img/graph7.png" style="width:100%;"> #}
+            <img src="/img/plotting/graph.png" style="width:100%;">
           </div> <!-- #view -->
 
           <!--  Plot section HIGHCHARTS   -->
@@ -90,20 +91,23 @@
       </div> <!-- panel -->
     </div> <!-- .row -->
     <div class="row">
-      <div id='plot-events-panel' class="panel">
+      {# <div id='plot-events-panel' class="panel"> #}
 
-        <div class="new-heading">
-          Events
-        </div> <!-- panel-heading -->
+        {# <div class="new-heading"> #}
+        {#   Events #}
+        {# </div> <!-- panel-heading --> #}
 
         <div class="scrollable-block">
           <div class="scrollable-area">
-            <div class="panel-body">
+
+            {# <div class="panel-body"> #}
               <div id="events-table">
-                <img id="plottingImg" src="/img/plotting/events.png">
+                {# <i class="fa fa-list-alt" style="margin-left:50%;font-size:90px;"> </i>                 #}
+                {# <img src="/img/cal.jpg" style="width:1120px; height:90px;">	       	        #}
+                <img src="/img/plotting/events.png" style="width:100%;">
               </div> <!-- panel-table -->
-            </div> <!-- panel-body -->
-          </div> <!-- panel -->
+              {# </div> <!-- panel-body --> #}
+            {# </div> <!-- panel --> #}
         </div>
       </div>
     </div>
@@ -115,7 +119,8 @@
         </div>
         <div class="panel-body">
           <div id="annotation-table">
-            <img id="plottingImg" src="/img/plotting/anotations.png">
+            {# <i class="fa fa-th-list" style="margin-left:50%;font-size:90px;"> </i>                 #}
+            <img src="/img/plotting/anotations.png" style="width:100%;">
           </div> <!-- annotation-table -->
         </div> <!-- panel-body -->
       </div> <!-- panel -->
@@ -505,9 +510,19 @@ _.extend(OOI.prototype, Backbone.Events, {
     //
     this.listenTo(this.collections.plotEventList, 'reset', function(collection) {
       self.views.plotEventListView.collection = collection;
+
+
+
       $.when(self.views.plotEventListView.render()).done(function() {
-        $("#eventsTable").stickyTableHeaders({ scrollableArea: $(".scrollable-area"), "fixedOffset": 2 });
+
+        $("table").stickyTableHeaders({ scrollableArea: $(".scrollable-area"), "fixedOffset": 2 });
+
+        console.log("made TI");
+
       });
+
+      {# $('#eventsTable').fixedHeaderTable({ altClass: 'odd', footer: true, fixedColumns: false, });   #}
+      {# }); #}
   });
 
   //
@@ -534,22 +549,8 @@ _.extend(OOI.prototype, Backbone.Events, {
     var bounds = self.views.timeseriesView.views.highchartsView.chart.xAxis[0].getExtremes()
 
       var min = moment.utc(bounds.userMin).format("YYYY-MM-DDTHH:mm:ss.000")+"Z";
-      var max = moment.utc(bounds.userMax).format("YYYY-MM-DDTHH:mm:ss.000")+"Z";
 
-      var model = new AnnotationModel({"referenceDesignator":self.models.downloadModel.model.get('reference_designator'),
-                                       "beginDT":min,
-                                       "endDT":max,
-                                       "method":self.models.downloadModel.model.get("stream_name"),
-                                       "stream_name":self.models.downloadModel.model.get("stream_name")
-                                      });
-
-      if(self.login.loggedIn()) {
-        self.views.annotationModal.show({
-          model: model,
-          userModel: self.models.userModel
-        });
-      }
-    });
+    var max = moment.utc(bounds.userMax).format("YYYY-MM-DDTHH:mm:ss.000")+"Z";   
 
     var model = new AnnotationModel({"referenceDesignator":self.models.downloadModel.model.get('reference_designator'),
       "beginDT":min,
