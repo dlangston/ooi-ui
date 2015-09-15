@@ -2,9 +2,9 @@
   font-size: 10px !important;
 }
 
-  /*********************
-  ****** Plotting  *****
-  *********************/
+/*********************
+ ****** Plotting  *****
+ *********************/
 
   div#plottingBody {
     margin-left: 20px;
@@ -142,7 +142,7 @@
     margin-bottom: -10px;
     background-color: #fff;
   }
-  
+
   /***********************
    ****** Tool Tips *******
    ***********************/
