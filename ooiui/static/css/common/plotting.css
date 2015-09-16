@@ -134,6 +134,10 @@
     background: transparent;
   }
 
+  /* div#highcharts-0 { */
+  /*   width: auto!important; */
+  /* } */
+  
   #select-stream-heading {
     border: 1px solid #D1DAF5;
     border-radius: 5px;
