@@ -350,32 +350,38 @@ var MapView = Backbone.View.extend({
         var level_one = [];
         var names = [];
         var asset_list;
+        var asset_lat;
+        var asset_lng;
+        var level_one_lat = [];
+        var level_one_lng = [];
+        var text = '<ul>';
           
         // Level One
         for (var i = 0; i < children.length; i++) {
           if(children[i].options.alt.indexOf('-') === -1 && map.getZoom() == 2) {
 
             level_one.push(children[i].options.alt);
-            asset_list = level_one;
+            asset_list = level_one;            
+            
+            level_one_lat.push(children[1]._latlng.lat);
+            asset_lat = level_one_lat
+
+            level_one_lng.push(children[1]._latlng.lng);
+            asset_lng = level_one_lng
           }
           if(children[i].options.alt.indexOf('-') > -1 && map.getZoom() === 10){
             level_two.push(children[i].options.alt);
             asset_list = level_two
           }
-        }
-        console.log("zoom = "+map.getZoom());
-        console.log("level_one = "+level_one);
-        console.log("leve_two = "+level_two);
-        console.log(a.layer.getAllChildMarkers());
+        // console.log("zoom = "+map.getZoom());
+        // console.log("level_one = "+level_one);
+        // console.log("leve_two = "+level_two);
+        // console.log(a.layer.getAllChildMarkers());
 
         // End Level One
         
         // Level Two
         
-
-
-
-
 // // original
 //         var children = a.layer.getAllChildMarkers();
 //         var _leafId = [];
@@ -397,8 +403,6 @@ var MapView = Backbone.View.extend({
 //         console.log("leaf id = "+_leafId);
 //         console.log(a.layer.getAllChildMarkers());
 //         console.log("names = "+names);      
-//
-//
 //         document.getElementById('names').innerHTML = names.join('\n');  
 //
 //         markers.on('clustermouseout', function (a) {
@@ -407,18 +411,64 @@ var MapView = Backbone.View.extend({
 //
 //
 //         });
-
-
-
-
+ 
         //generate normal popup
         popup = L.popup({offset: new L.Point(0, -20)})
           .setLatLng(a.latlng)
-          .setContent('<div class="cluster-popup"><h4>'+title+'<img id="clusterImg" src="/img/sciMap/OOI_Logo.png"></h4><p>'+a.layer.getAllChildMarkers().length+' assets'+'</p></div><p><div id="names">names = '+asset_list+'</p></div>')
+          .setContent('<h4 id="popTitle" class="cluster-popup"><strong>'+title+'</strong><img id="clusterImg" src="/img/sciMap/OOI_Logo.png"></h4>'+
+              // Latitude & Longitude
+              '<h5 class="ll-container"><div class="latFloat"><strong>Latitude:</strong>&nbsp;'+children[0]._latlng.lat+'</div><div class="lonFloat"><strong>Longitude:</strong>&nbsp;'+children[0]._latlng.lng+'</div></h5>'+
+              // Deployment Event(s)
+              '<div class="deploy-container">'+        
+              '<h5 id="deployEvents"><strong>Deployment Event(s)</strong></h5>'+
+              '<div class="floatLeft">'+
+               '<tabel>'+
+                '<tr>'+
+                  '<th>'+
+                    '<h6><strong>'+
+                      'First'+
+                    '</h6></strong>'+
+                  '</th>'+
+                '<tr>'+
+                '<td>'+children[0].options.alt+'</td>'+
+                '</tr>'+
+              '</tabel>'+
+             '</div>'+
+              '<div class="floatRight">'+
+                '<tabel>'+
+                  '<tr>'+
+                    '<th>'+
+                      '<h6><strong>'+
+                        'Recent'+
+                      '</h6></strong>'+
+                    '</th>'+
+                  '</tr>'+
+                  '<td>'+children[1].options.alt+'</td>'+
+                  '</tr>'+
+                '</tabel>'+
+              '</div>'+
+              '</div>'+
+              //              
+              // asset_list names
+              '<div class="array-container">'+
+              '<h6><strong>List of Aarrays:</strong><h6>&nbsp;<br><ul><li>'+children[i].options.alt+'</li><br /></ul>'+
+              '</div>')
+              //End normal popup
+             
+              // '<h5 id="deployEvents"><strong>Deployment Event(s)</strong><br></h5><div class="map-pop-container">'+
+              // '<div class="floatLeft"><h6><strong>First</strong></h6><tabel><tr><td><strong>ID:&nbsp;'+asset_lat+'</strong></td></tr></table></div>'+
+              // '<div class="floatLeft"><h6><strong>Recent</strong></h6><tabel><tr><td><strong>ID:&nbsp;'+asset_lng+'</strong></td></tr></table></div>')
+
+              // '<div id="assets-array"<p>'+a.layer.getAllChildMarkers().length+' assets'+'</p></div>'+
+             
+               
           .openOn(map);
           // console.log(a.layer.getAllChildMarkers());
-      }
-      asset_list = null;
+              }
+      
+        }
+
+        asset_list = null;
 
 
 
@@ -559,13 +609,13 @@ var MapView = Backbone.View.extend({
 
                 if (_.isNull(item['endDate'])){
                   eventContent += '<div class="floatLeft">';
-                  eventContent += '<h6><strong>Current</strong></h6><table><tr><td><strong>ID:&nbsp;</strong>'+ item['deploymentNumber'] +'</tr>';
+                  eventContent += '<h6><strong>Current</strong></h6><table><tr><td><strong>ID:&nbsp;</strong>'+ item['deploymentNumber'] +'</td></tr>';
                   eventContent += '<tr><td><strong>Start:&nbsp;</strong>'+ moment(item['startDate']).utc().format("YYYY-MM-DD")+'</td></tr>';
                   eventContent +='<tr><td><strong>End:&nbsp;</strong>'+ "Still Deployed"+'</td></tr></table></div>';
 
                 }else{
                   eventContent += '<div class="floatRight">';
-                  eventContent += '<h6><strong>Previous</strong></h6><table><tr><td><strong>ID:&nbsp;</strong>'+ item['deploymentNumber'] +'</tr>';
+                  eventContent += '<h6><strong>Previous</strong></h6><table><tr><td><strong>ID:&nbsp;</strong>'+ item['deploymentNumber'] +'</td></tr>';
                   eventContent += '<tr><td><strong>Start:&nbsp;</strong>'+ moment(item['startDate']).utc().format("YYYY-MM-DD")+'</td></tr>';
                   eventContent +='<tr><td><strong>End:&nbsp;</strong>'+ moment(item['endDate']).utc().format("YYYY-MM-DD")+'</td></tr></table></div>';
                 }
