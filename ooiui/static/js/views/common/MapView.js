@@ -4,31 +4,31 @@ var MapView = Backbone.View.extend({
     var self = this;
 
     var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      mbUrl = 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
+    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    mbUrl = 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
 
 
     var grayscale   = L.tileLayer(mbUrl, {id: 'examples.map-20v6611k', attribution: mbAttr});
 
     var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-        });
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    });
 
     var Esri_OceanBasemap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
-        maxZoom: 13
-        });
+      attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
+      maxZoom: 13
+    });
 
     var Esri_WorldTerrain = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
-        maxZoom: 13
-        });
+      attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
+      maxZoom: 13
+    });
 
     var NGDC_WorldTerrain = L.tileLayer('http://maps.ngdc.noaa.gov/arcgis/rest/services/web_mercator/etopo1_hillshade/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Hillshade visualization by J. Varner and E. Lim, CIRES, University of Colorado at Boulder and NOAA/NGDC.',
-        maxZoom: 13
-        });
+      attribution: 'Tiles &copy; Hillshade visualization by J. Varner and E. Lim, CIRES, University of Colorado at Boulder and NOAA/NGDC.',
+      maxZoom: 13
+    });
 
     self.arrayTitle =   {
       "pioneer":"Coastal Pioneer",
@@ -48,7 +48,8 @@ var MapView = Backbone.View.extend({
       "southern":"http://oceanobservatories.org/wp-content/uploads/southern-ocean-instruments-503x350.jpg"
     }
 
-    self.arrayMapping = {"pioneer":new L.LatLngBounds([[42,-74],[36,-65]]),
+    self.arrayMapping = {
+      "pioneer":new L.LatLngBounds([[42,-74],[36,-65]]),
       "endurance":new L.LatLngBounds([[48,-133],[-42,-123]]),
       "papa": new L.LatLngBounds([[52,-150],[46,-139]]),
       "irminger": new L.LatLngBounds([[61,-43],[57,-35]]),
@@ -56,7 +57,8 @@ var MapView = Backbone.View.extend({
       "southern":new L.LatLngBounds([[-52,-95],[-56,-85]])
     }
 
-    self.sizeMapping = {"pioneer":[200,300],
+    self.sizeMapping = {
+      "pioneer":[200,300],
       "endurance":[200,400],
       "papa":[250,250],
       "irminger":[200,250],
@@ -73,7 +75,7 @@ var MapView = Backbone.View.extend({
 
     this.inititalMapBounds = [[63, -143],[-59, -29]]
 
-      L.control.mousePosition().addTo(this.map);
+    L.control.mousePosition().addTo(this.map);
 
     L.easyButton('fa-globe', function(btn, map){
       map.fitBounds(self.inititalMapBounds);
@@ -83,7 +85,7 @@ var MapView = Backbone.View.extend({
       "ESRI Oceans": Esri_OceanBasemap,
       "NGDC Bathymetry" : NGDC_WorldTerrain,
       "ESRI Terrain": Esri_WorldTerrain,
-        "World Imagery" : Esri_WorldImagery,
+      "World Imagery" : Esri_WorldImagery,
       "Grayscale": grayscale,
     };
 
@@ -94,20 +96,20 @@ var MapView = Backbone.View.extend({
     nearNow.setSeconds(0);
 
     var layerParams = [
-    {
-      url:"http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/obs",
-      name:"Precipitation",
-      layers:"RAS_RIDGE_NEXRAD",
-      format: "image/png",
-      transparent: true
-    },
-    {
-      url:"http://gis.srh.noaa.gov/arcgis/services/NDFDTemps/MapServer/WMSServer",
-      name:"Temperature",
-      layers:16,
-      format: "image/png",
-      transparent: true
-    },
+      {
+        url:"http://nowcoast.noaa.gov/wms/com.esri.wms.Esrimap/obs",
+        name:"Precipitation",
+        layers:"RAS_RIDGE_NEXRAD",
+        format: "image/png",
+        transparent: true
+      },
+      {
+        url:"http://gis.srh.noaa.gov/arcgis/services/NDFDTemps/MapServer/WMSServer",
+        name:"Temperature",
+        layers:16,
+        format: "image/png",
+        transparent: true
+      },
       {
         url:"http://coastmap.com/ecop/wms.aspx",
         name:"GFS WIND Model",
@@ -126,22 +128,22 @@ var MapView = Backbone.View.extend({
         transparent: true,
         time: moment(nearNow).format()
       },
-        {
-          url:"http://coastmap.com/ecop/wms.aspx",
-          name:"HYCOM Currents",
-          styles: "CURRENTS_RAMP-Jet-False-4-True-0-2-high",
-          layers:"HYCOM_GLOBAL_NAVY_CURRENTS",
-          format: "image/png",
-          transparent: true,
-          time: moment(nearNow).format()
-        }
+      {
+        url:"http://coastmap.com/ecop/wms.aspx",
+        name:"HYCOM Currents",
+        styles: "CURRENTS_RAMP-Jet-False-4-True-0-2-high",
+        layers:"HYCOM_GLOBAL_NAVY_CURRENTS",
+        format: "image/png",
+        transparent: true,
+        time: moment(nearNow).format()
+      }
     ]
 
-      var wmsLayers = {}
+    var wmsLayers = {}
     $.each(layerParams, function( index, value ) {
       var params = _.clone(value);
       var new_layer = L.WMS.overlay(value.url, params)
-        wmsLayers[value.name] = new_layer
+      wmsLayers[value.name] = new_layer
     });
     //wmsLayers['Glider Track'] = this.generate_glider_layer();
     this.wmsLayers = wmsLayers;
@@ -156,10 +158,10 @@ var MapView = Backbone.View.extend({
 
     this.listenTo(ooi.models.mapModel, 'change', this.setMapView)
 
-      this.collection.fetch({success: function(collection, response, options) {
-        self.render();
-        return this
-      }});
+    this.collection.fetch({success: function(collection, response, options) {
+      self.render();
+      return this
+    }});
 
     return this
   },
@@ -184,25 +186,25 @@ var MapView = Backbone.View.extend({
 
 
   },
-    //deprecated i think
+  //deprecated i think
   update_track_glider: function(reference_designator,show_track){
     var self = this;
     var map = this.map;
     console.log("CLICK!");
     map.removeLayer(self.gliderLayer)
-      if (show_track){
-        var gliderModel = new GliderTrackModel(reference_designator+'-00-ENG000000');
-        var ref = gliderModel.get('reference_designator')
-          gliderModel.fetch({
-            data: $.param({id:ref}),
-            success: function(collection, response, options) {
-              var gl = self.generate_glider_layer(response);
-              gl.addTo(map);
-              self.gliderLayer = gl
-            },
-            reset: true
-          });
-      }
+    if (show_track){
+      var gliderModel = new GliderTrackModel(reference_designator+'-00-ENG000000');
+      var ref = gliderModel.get('reference_designator')
+      gliderModel.fetch({
+        data: $.param({id:ref}),
+        success: function(collection, response, options) {
+          var gl = self.generate_glider_layer(response);
+          gl.addTo(map);
+          self.gliderLayer = gl
+        },
+        reset: true
+      });
+    }
   },
   showLayers:function(){
     /*
@@ -213,7 +215,7 @@ var MapView = Backbone.View.extend({
       //console.log(layer.options.color);
     });
   },
-    //deprecated i think
+  //deprecated i think
   generate_glider_layer:function(geojson){
     if (geojson === undefined){
       var gliderTrackLine = {
@@ -233,7 +235,7 @@ var MapView = Backbone.View.extend({
     var gliderTrackLayer = L.geoJson(gliderTrackLine, {style: gliderTrackStyle});
     return gliderTrackLayer
   },
-    //toc selected item
+  //toc selected item
   selectMarker: function(select_model,type,show_popoup){
     var self = this;
     if (type == "stream"){
@@ -244,16 +246,15 @@ var MapView = Backbone.View.extend({
 
     var split = ref_des.split('-');
     var new_split  = []
-      new_split.push(split[0]);
+    new_split.push(split[0]);
     new_split.push(split[1]);
     ref_des = new_split.join('-');
-
     var found = false
 
-      //close all open markers
-      _.each(this.markerCluster.getLayers(), function(marker) {
-        marker.closePopup();
-      });
+    //close all open markers
+    _.each(this.markerCluster.getLayers(), function(marker) {
+      marker.closePopup();
+    });
 
     //we only want to show popups on the expand
     if (show_popoup){
@@ -281,7 +282,7 @@ var MapView = Backbone.View.extend({
       }
     }
   },
-    //renders a simple map view
+  //renders a simple map view
   render: function() {
     var self = this;
     //needs to be set
@@ -295,56 +296,23 @@ var MapView = Backbone.View.extend({
     //add labels
     _.each(self.arrayMapping, function(arrayMap,index) {
       var labelMarker = L.marker([arrayMap._northEast.lat, arrayMap._southWest.lng-2],{ opacity: 0.001 })
-        .bindLabel(self.arrayTitle[index], { className: "array-title-label", noHide: true });
+      .bindLabel(self.arrayTitle[index], { className: "array-title-label", noHide: true });
       self.arrayLayers.addLayer(labelMarker);
-
-
     });
 
     self.arrayLayers.addTo(map);
     var popup = null;
     self.markerCluster = new L.MarkerClusterGroup({iconCreateFunction: function(cluster) {
       return new L.DivIcon({ html: '<b class="textClusteredMarker">' + '</b>', //cluster.getChildCount() + '</b>' ,
-        className: 'clusterdMarker',
-        iconSize: L.point(40, 40)
+                           className: 'clusterdMarker',
+                           iconSize: L.point(40, 40)
       });
     },
-      spiderfyDistanceMultiplier:2,
-      showCoverageOnHover: false
+    spiderfyDistanceMultiplier:2,
+    showCoverageOnHover: false
     });
 
     self.markerCluster.on('clustermouseover', function (a) {
-      if (map.getZoom() === 3 || map.getZoom()==4 ) {
-        var url = null;
-        var size = null;
-        var title = null;
-        _.each(self.arrayMapping, function(arrayMap,index) {
-          if (arrayMap.contains(a.latlng)){
-            url = self.arrayLinks[index];
-            size = self.sizeMapping[index];
-            title = self.arrayTitle[index];
-          }
-        })
-
-        //generate array popup
-        popup = L.popup({offset: new L.Point(0, -20)})
-          .setLatLng(a.latlng)
-          .setContent('<h4 id="arrayPopup">'+title+'</h4><br><img id="arrayImg" height="'+size[0]+'" width="'+size[1]+'" src="'+url+'">')
-
-          .openOn(map);
-      }else{
-        _.each(self.arrayMapping, function(arrayMap,index) {
-          if (arrayMap.contains(a.latlng)){
-            url = self.arrayLinks[index];
-            size = self.sizeMapping[index];
-            title = self.arrayTitle[index];
-          }
-        })
-
-
-
-
-
         var children = a.layer.getAllChildMarkers();
         var level_two = [];
         var level_one = [];
@@ -354,132 +322,128 @@ var MapView = Backbone.View.extend({
         var asset_lng;
         var level_one_lat = [];
         var level_one_lng = [];
-        var text = '<ul>';
-          
+        var textarea = document.getElementById("asset_list");
+        // var text = '<ul>';
+
         // Level One
+      if (map.getZoom() === 2) {
+        var url = null;
+        var size = null;
+        var title = null;
+ 
+        _.each(self.arrayMapping, function(arrayMap,index) {
+          if (arrayMap.contains(a.latlng)){
+            url = self.arrayLinks[index];
+            size = self.sizeMapping[index];
+            title = self.arrayTitle[index];
+          }
+        })
+
         for (var i = 0; i < children.length; i++) {
           if(children[i].options.alt.indexOf('-') === -1 && map.getZoom() == 2) {
-
             level_one.push(children[i].options.alt);
             asset_list = level_one;            
-            
+
+// console.log("child "+i+" asset " +level_one)
             level_one_lat.push(children[1]._latlng.lat);
             asset_lat = level_one_lat
-
             level_one_lng.push(children[1]._latlng.lng);
             asset_lng = level_one_lng
+          } // end if level_one
+        }
+          
+        //generate array popup
+          popup = L.popup({offset: new L.Point(0, -20)})
+            .setLatLng(a.latlng)
+            .setContent('<h4 id="arrayPopup">'+title+'</h4><br><img id="arrayImg" height="'+size[0]+'" width="'+size[1]+'" src="'+url+'"><br>'+
+                '<h6 id="arrayPopupFooter">&nbsp;'+level_one.join("<br>&nbsp;")+'</h6>')
+            .openOn(map);
+        
+        console.log("level_one = "+level_one.join("\n"));
+        console.log(a.layer.getAllChildMarkers());
+
+        // console.log("url" +url);
+        // console.log("size" +size);
+        // console.log("title" +title);
+      }else{ // end if map.getZoom
+        _.each(self.arrayMapping, function(arrayMap,index) {
+          if (arrayMap.contains(a.latlng)){
+            url = self.arrayLinks[index];
+            size = self.sizeMapping[index];
+            title = self.arrayTitle[index];
           }
+        }) //end _.each
+
+        for (var i = 0; i < children.length; i++) {
           if(children[i].options.alt.indexOf('-') > -1 && map.getZoom() === 10){
             level_two.push(children[i].options.alt);
             asset_list = level_two
-          }
-        // console.log("zoom = "+map.getZoom());
-        // console.log("level_one = "+level_one);
-        // console.log("leve_two = "+level_two);
-        // console.log(a.layer.getAllChildMarkers());
 
-        // End Level One
-        
-        // Level Two
-        
-// // original
-//         var children = a.layer.getAllChildMarkers();
-//         var _leafId = [];
-//         var level_one = [];
-//         var names = [];
-//
-//         for (var i = 0; i < children.length; i++) {
-//           // if(children[i]._leaflet_id >= 0) {
-//           if(children[i].options.alt.indexOf('-') === -1) {
-//
-//             level_one.push(children[i].options.alt);
-//             // _leafId.push(children[i]._leaflet_id);
-//
-//             // names.push(children[i].options.alt);
-//           // console.log("children's "+i);
-//           }
-//         }
-//         console.log("level_one = "+level_one);
-//         console.log("leaf id = "+_leafId);
-//         console.log(a.layer.getAllChildMarkers());
-//         console.log("names = "+names);      
-//         document.getElementById('names').innerHTML = names.join('\n');  
-//
-//         markers.on('clustermouseout', function (a) {
-//             document.getElementById('names').innerHTML = ('');
-//             document.getElementById('children').innerHTML = ('');
-//
-//
-//         });
- 
-        //generate normal popup
-        popup = L.popup({offset: new L.Point(0, -20)})
-          .setLatLng(a.latlng)
-          .setContent('<h4 id="popTitle" class="cluster-popup"><strong>'+title+'</strong><img id="clusterImg" src="/img/sciMap/OOI_Logo.png"></h4>'+
-              // Latitude & Longitude
-              '<h5 class="ll-container"><div class="latFloat"><strong>Latitude:</strong>&nbsp;'+children[0]._latlng.lat+'</div><div class="lonFloat"><strong>Longitude:</strong>&nbsp;'+children[0]._latlng.lng+'</div></h5>'+
-              // Deployment Event(s)
-              '<div class="deploy-container">'+        
-              '<h5 id="deployEvents"><strong>Deployment Event(s)</strong></h5>'+
-              '<div class="floatLeft">'+
-               '<tabel>'+
+          popup = L.popup({offset: new L.Point(0, -20)})
+            .setLatLng(a.latlng)
+            .setContent('<h4 id="popTitle" class="cluster-popup"><strong>'+title+'</strong><img id="clusterImg" src="/img/sciMap/OOI_Logo.png"></h4>'+
+                // Latitude & Longitude
+                '<h5 class="ll-container"><div class="latFloat"><strong>Latitude:</strong>&nbsp;'+children[0]._latlng.lat+'</div><div class="lonFloat"><strong>Longitude:</strong>&nbsp;'+children[0]._latlng.lng+'</div></h5>'+
+                // Deployment Event(s)
+                '<div class="deploy-container">'+        
+                '<h5 id="deployEvents"><strong>Deployment Event(s)</strong></h5>'+
+                '<div class="floatLeft">'+
+                '<tabel>'+
                 '<tr>'+
-                  '<th>'+
-                    '<h6><strong>'+
-                      'First'+
-                    '</h6></strong>'+
-                  '</th>'+
+                '<th>'+
+                '<h6><strong>'+
+                'First'+
+                '</h6></strong>'+
+                '</th>'+
                 '<tr>'+
                 '<td>'+children[0].options.alt+'</td>'+
                 '</tr>'+
-              '</tabel>'+
-             '</div>'+
-              '<div class="floatRight">'+
-                '<tabel>'+
-                  '<tr>'+
-                    '<th>'+
-                      '<h6><strong>'+
-                        'Recent'+
-                      '</h6></strong>'+
-                    '</th>'+
-                  '</tr>'+
-                  '<td>'+children[1].options.alt+'</td>'+
-                  '</tr>'+
                 '</tabel>'+
-              '</div>'+
-              '</div>'+
-              //              
-              // asset_list names
-              '<div class="array-container">'+
-              '<h6><strong>List of Aarrays:</strong><h6>&nbsp;<br><ul><li>'+children[i].options.alt+'</li><br /></ul>'+
-              '</div>')
-              //End normal popup
-             
-              // '<h5 id="deployEvents"><strong>Deployment Event(s)</strong><br></h5><div class="map-pop-container">'+
-              // '<div class="floatLeft"><h6><strong>First</strong></h6><tabel><tr><td><strong>ID:&nbsp;'+asset_lat+'</strong></td></tr></table></div>'+
-              // '<div class="floatLeft"><h6><strong>Recent</strong></h6><tabel><tr><td><strong>ID:&nbsp;'+asset_lng+'</strong></td></tr></table></div>')
+                '</div>'+
+                '<div class="floatRight">'+
+                '<tabel>'+
+                '<tr>'+
+                '<th>'+
+                '<h6><strong>'+
+                'Recent'+
+                '</h6></strong>'+
+                '</th>'+
+                '</tr>'+
+                '<td>'+children[1].options.alt+'</td>'+
+                '</tr>'+
+                '</tabel>'+
+                '</div>'+
+                '</div>'+
+                //              
+                // asset_list names
+                '<div class="array-container">'+
+                '<h6 id="arrayPopupFooter">&nbsp;'+level_two.join("<br>&nbsp;")+'</div>')
+                //End normal popup
 
-              // '<div id="assets-array"<p>'+a.layer.getAllChildMarkers().length+' assets'+'</p></div>'+
-             
-               
-          .openOn(map);
-          // console.log(a.layer.getAllChildMarkers());
-              }
-      
-        }
+                // '<h5 id="deployEvents"><strong>Deployment Event(s)</strong><br></h5><div class="map-pop-container">'+
+                // '<div class="floatLeft"><h6><strong>First</strong></h6><tabel><tr><td><strong>ID:&nbsp;'+asset_lat+'</strong></td></tr></table></div>'+
+                // '<div class="floatLeft"><h6><strong>Recent</strong></h6><tabel><tr><td><strong>ID:&nbsp;'+asset_lng+'</strong></td></tr></table></div>')
+                // '<div id="assets-array"<p>'+a.layer.getAllChildMarkers().length+' assets'+'</p></div>'+
+                .openOn(map);
+          } // end if level_two
+          console.log("leve_two = " +moment());
 
-        asset_list = null;
-
-
-
+        } // end for
+      } // end else
+    asset_list = null;
 
 
 
-    });
+
+
+
+  });
     map.on('zoomend', function(e) {
-      if (map.getZoom() === 3 || map.getZoom()==4 ) {
+      // image
+      if (map.getZoom() === 2 ) {
         $('.array-title-label').css('display','');
       }else{
+        // no image
         $('.array-title-label').css('display','none');
       }
     });
@@ -529,111 +493,112 @@ var MapView = Backbone.View.extend({
 
       //get the stations
       var platforms = self.collection.where({ ref_des:platform_id , asset_class: '.AssetRecord' })
+      var lat_lons = []
 
-        var lat_lons = []
-
-        if (platforms.length > 0 && platforms[0].get('coordinates').length == 2){
-
+      if (platforms.length > 0 && platforms[0].get('coordinates').length == 2){
 
 
-          //reset the event popup
-          var eventPopup = ""
-            var name = platforms[0].get('assetInfo')['name']
 
-            if (name == null){
-              name = platforms[0].get('ref_des')
-            }
+        //reset the event popup
+        var eventPopup = ""
+        var name = platforms[0].get('assetInfo')['name']
 
-
-          // Plotting
-          if (typeof(platform_id) != "undefined"){
-            var ref_des_split = platform_id.split("-")
-              //get the current location
-              if (!location.origin)
-                location.origin = location.protocol + "//" + location.host;
-
-            //get the parts
-            var array = platform_id.substring(0, 2);
-            var mooring = ref_des_split[0]
-              var platform_val = ref_des_split[1]
-
-              var platformFeature = null
-              if (_.isUndefined(platform_val)){
-                //itemType = "mooring"
-                platformFeature = new OOICustomMarker(platforms[platforms.length -1].get('coordinates'),{icon: mooringIcon});
-              }else if (name.toLowerCase().indexOf("glider") > -1){
-                platformFeature = new OOICustomMarker(platforms[platforms.length -1].get('coordinates'),{icon: gliderIcon});
-              }else{
-                //itemType = "platform"
-                platformFeature = new OOICustomMarker(platforms[platforms.length -1].get('coordinates'),{icon: platformIcon});
-              }
-
-            platformFeature.options.alt = platforms[0].get('ref_des')
-
-              if (ref_des_split.length > 2){
-                var instrument = platform_id
-                  var instrument_url = [array, mooring, platform_val , instrument].join("/");
-              }else{
-                var instrument_url = [array, mooring, platform_val].join("/");
-              }
-            //          var instrument_plot = '</div><br><br><div><a href="/plotting/' + instrument_url + '"><i class="fa fa-bar-chart">&nbsp;</i>Plotting</a>&nbsp;&nbsp;&#124;&nbsp;&nbsp;'
-          }else{
-            var instrument_plot = ""
-          }
-
-          var eventContent = '<h5 id="deployEvents"><strong>Deployment Event(s)</strong></h5><div class="map-pop-container">';
-          var popupContent = ""
-            var hasDeploymentEvent = false;
-
-          //loop through each to create the popup
-          _.each(platforms, function(platform_entry) {
-            lat_lons.push(platform_entry.get('coordinates'))
-
-              var events = platform_entry.get('events');
-            _.each(events, function(item) {
-              if (item['class'] == ".DeploymentEvent"){
-                if (!hasDeploymentEvent){
-                  // Name
-                  popupContent = '<h4 id="popTitle"><strong>' + name + '</strong></h4>';
-                  // Lat & Lon
-                  popupContent+= '<h5 id="latLon"><div class="latFloat"><strong>Latitude:</strong> '+platforms[platforms.length -1].get('coordinates')[0] + '</div><div class="lonFloat"><strong>Longitude:</strong> ' + platforms[platforms.length -1].get('coordinates')[1] + '</div>';
-                  // Plotting
-                  popupContent += '<br><br><div><a href="/plotting/#'+platforms[0].get('ref_des')+'"><i class="fa fa-bar-chart">&nbsp;</i>Plotting</a>&nbsp;&nbsp;&#124;&nbsp;&nbsp;';
-                  // Data Catalog
-                  popupContent+='<a href="/streams/#'+platforms[0].get('ref_des')+'"><i class="fa fa-database">&nbsp;</i>Data Catalog</a>&nbsp;&nbsp;&#124;&nbsp;&nbsp;';
-                  // Asset Managment
-                  popupContent+='<a href="/assets/list?' + platforms[0].get('ref_des') + '"><i class="fa fa-sitemap">&nbsp;</i>Asset Management</a></div></h5>';
-                }
-
-                hasDeploymentEvent = true;
-
-                if (_.isNull(item['endDate'])){
-                  eventContent += '<div class="floatLeft">';
-                  eventContent += '<h6><strong>Current</strong></h6><table><tr><td><strong>ID:&nbsp;</strong>'+ item['deploymentNumber'] +'</td></tr>';
-                  eventContent += '<tr><td><strong>Start:&nbsp;</strong>'+ moment(item['startDate']).utc().format("YYYY-MM-DD")+'</td></tr>';
-                  eventContent +='<tr><td><strong>End:&nbsp;</strong>'+ "Still Deployed"+'</td></tr></table></div>';
-
-                }else{
-                  eventContent += '<div class="floatRight">';
-                  eventContent += '<h6><strong>Previous</strong></h6><table><tr><td><strong>ID:&nbsp;</strong>'+ item['deploymentNumber'] +'</td></tr>';
-                  eventContent += '<tr><td><strong>Start:&nbsp;</strong>'+ moment(item['startDate']).utc().format("YYYY-MM-DD")+'</td></tr>';
-                  eventContent +='<tr><td><strong>End:&nbsp;</strong>'+ moment(item['endDate']).utc().format("YYYY-MM-DD")+'</td></tr></table></div>';
-                }
-              }
-            });
-          });
-          eventContent += '</div></div>';
-          popupContent+=eventContent;
-
-
-          //only add the item if there are deployment events
-          if (hasDeploymentEvent){
-
-            platformFeature.bindPopup(popupContent,{offset: new L.Point(0, 0),showOnMouseOver: true});
-
-            self.markerCluster.addLayer(platformFeature);
-          }
+        if (name == null){
+          name = platforms[0].get('ref_des')
         }
+
+
+        // Plotting
+        if (typeof(platform_id) != "undefined"){
+          var ref_des_split = platform_id.split("-")
+          //get the current location
+          if (!location.origin)
+            location.origin = location.protocol + "//" + location.host;
+
+          //get the parts
+          var array = platform_id.substring(0, 2);
+          var mooring = ref_des_split[0]
+          var platform_val = ref_des_split[1]
+
+          var platformFeature = null
+          if (_.isUndefined(platform_val)){
+            //itemType = "mooring"
+            platformFeature = new OOICustomMarker(platforms[platforms.length -1].get('coordinates'),{icon: mooringIcon});
+          }else if (name.toLowerCase().indexOf("glider") > -1){
+            platformFeature = new OOICustomMarker(platforms[platforms.length -1].get('coordinates'),{icon: gliderIcon});
+          }else{
+            //itemType = "platform"
+            platformFeature = new OOICustomMarker(platforms[platforms.length -1].get('coordinates'),{icon: platformIcon});
+          }
+
+          platformFeature.options.alt = platforms[0].get('ref_des')
+
+          if (ref_des_split.length > 2){
+            var instrument = platform_id
+            var instrument_url = [array, mooring, platform_val , instrument].join("/");
+          }else{
+            var instrument_url = [array, mooring, platform_val].join("/");
+          }
+          //          var instrument_plot = '</div><br><br><div><a href="/plotting/' + instrument_url + '"><i class="fa fa-bar-chart">&nbsp;</i>Plotting</a>&nbsp;&nbsp;&#124;&nbsp;&nbsp;'
+        }else{
+          var instrument_plot = ""
+        }
+
+        var eventContent = '<h5 id="deployEvents"><strong>Deployment Event(s)</strong></h5><div class="map-pop-container">';
+        var popupContent = ""
+        var hasDeploymentEvent = false;
+
+        //loop through each to create the popup
+        _.each(platforms, function(platform_entry) {
+          lat_lons.push(platform_entry.get('coordinates'))
+
+          var events = platform_entry.get('events');
+          _.each(events, function(item) {
+            if (item['class'] == ".DeploymentEvent"){
+              if (!hasDeploymentEvent){
+                // Name
+                popupContent = '<h4 id="popTitle"><strong>' + name + '</strong></h4>';
+                // Lat & Lon
+                popupContent+= '<h5 id="latLon"><div class="latFloat"><strong>Latitude:</strong> '+platforms[platforms.length -1].get('coordinates')[0] + '</div><div class="lonFloat"><strong>Longitude:</strong> ' + platforms[platforms.length -1].get('coordinates')[1] + '</div>';
+                // Plotting
+                popupContent += '<br><br><div><a href="/plotting/#'+platforms[0].get('ref_des')+'"><i class="fa fa-bar-chart">&nbsp;</i>Plotting</a>&nbsp;&nbsp;&#124;&nbsp;&nbsp;';
+                // Data Catalog
+                popupContent+='<a href="/streams/#'+platforms[0].get('ref_des')+'"><i class="fa fa-database">&nbsp;</i>Data Catalog</a>&nbsp;&nbsp;&#124;&nbsp;&nbsp;';
+                // Asset Managment
+                popupContent+='<a href="/assets/list?' + platforms[0].get('ref_des') + '"><i class="fa fa-sitemap">&nbsp;</i>Asset Management</a></div></h5>';
+              }
+
+              hasDeploymentEvent = true;
+
+              if (_.isNull(item['endDate'])){
+                eventContent += '<div class="floatLeft">';
+                eventContent += '<h6><strong>Current</strong></h6><table><tr><td><strong>ID:&nbsp;</strong>'+ item['deploymentNumber'] +'</td></tr>';
+                eventContent += '<tr><td><strong>Start:&nbsp;</strong>'+ moment(item['startDate']).utc().format("YYYY-MM-DD")+'</td></tr>';
+                eventContent +='<tr><td><strong>End:&nbsp;</strong>'+ "Still Deployed"+'</td></tr></table></div>';
+
+              }else{
+                eventContent += '<div class="floatRight">';
+                eventContent += '<h6><strong>Previous</strong></h6><table><tr><td><strong>ID:&nbsp;</strong>'+ item['deploymentNumber'] +'</td></tr>';
+                eventContent += '<tr><td><strong>Start:&nbsp;</strong>'+ moment(item['startDate']).utc().format("YYYY-MM-DD")+'</td></tr>';
+                eventContent +='<tr><td><strong>End:&nbsp;</strong>'+ moment(item['endDate']).utc().format("YYYY-MM-DD")+'</td></tr></table></div>';
+                console.log("moment " +moment());
+                console.log("item " +item['class']);
+              }
+            }
+          });
+        });
+        eventContent += '</div></div>';
+        popupContent+=eventContent;
+
+
+        //only add the item if there are deployment events
+        if (hasDeploymentEvent){
+
+          platformFeature.bindPopup(popupContent,{offset: new L.Point(0, 0),showOnMouseOver: true});
+
+          self.markerCluster.addLayer(platformFeature);
+        }
+      }
 
     })
 
@@ -741,3 +706,48 @@ var OOICustomMarker = L.Marker.extend({
 
 });
 
+
+
+
+       // lat lon problem
+          // console.log("map zoom = "+map.getZoom());
+
+          // console.log(a.layer.getAllChildMarkers());
+
+// console.log("level_one = "+level_one);
+// console.log("leve_two = "+level_two);
+// console.log(a.layer.getAllChildMarkers());
+
+// End Level One
+
+// Level Two
+
+// // original
+//         var children = a.layer.getAllChildMarkers();
+//         var _leafId = [];
+//         var level_one = [];
+//         var names = [];
+//
+//         for (var i = 0; i < children.length; i++) {
+//           // if(children[i]._leaflet_id >= 0) {
+//           if(children[i].options.alt.indexOf('-') === -1) {
+//
+//             level_one.push(children[i].options.alt);
+//             // _leafId.push(children[i]._leaflet_id);
+//
+//             // names.push(children[i].options.alt);
+//           // console.log("children's "+i);
+//           }
+//         }
+//         console.log("level_one = "+level_one);
+//         console.log("leaf id = "+_leafId);
+//         console.log(a.layer.getAllChildMarkers());
+//         console.log("names = "+names);      
+//         document.getElementById('names').innerHTML = names.join('\n');  
+//
+//         markers.on('clustermouseout', function (a) {
+//             document.getElementById('names').innerHTML = ('');
+//             document.getElementById('children').innerHTML = ('');
+//
+//
+//         });
